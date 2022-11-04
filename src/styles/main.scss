@@ -1,4 +1,76 @@
 // css reset
 @use 'reset';
 
-// typography & color palette
+//ui-constants
+$main-shadow: 0rem 0rem 0.5rem hsla(0, 0%, 0%, 0.1);
+$main-padding:1.4rem;
+$main-radius: .5rem;
+
+// color palette
+$color-primary: rgb(226, 101, 23);
+$color-secondary: rgb(37, 22, 86);
+
+// Typography
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+$font-family: 'Poppins', sans-serif;
+
+// Main APP
+#app{
+    display:flex;
+    flex-wrap: wrap;
+    width: 100vw;
+    justify-content: left;
+    font-family: $font-family;
+}
+
+// Sidebar
+nav {
+    ul {
+        display:flexbox;
+        justify-content: center;
+        align-items: center;
+        width: 20rem;
+        height: calc(100vh - 3.2rem);
+        background: #eee;
+        padding: 1rem;
+        li {
+            width:100%;
+            margin:0.2rem;
+            background-color: hsl(0, 0%, 100%);
+            border-radius: $main-radius;
+            a {
+                width:100%;
+                display: block;
+                padding: 1rem;
+            }
+        }
+    }
+}
+
+// Top Bar
+.top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+    height: 3.2rem;
+    width: 100vw;
+    background-color:hsl(264, 5%, 18%);
+    ul>li {
+        display: inline;
+        margin-inline-end: 1rem;
+    }
+    .logo {
+        margin-left: 1rem;
+        font-size: 1.5rem;
+        color: rgb(219, 219, 219);
+    }
+}
+
+// Dashboard Content
+main {
+    display:flex;
+    flex-wrap: wrap;
+    padding:$main-padding;
+    width: calc(100vw - 20rem);
+}
