@@ -1,7 +1,9 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import App from './App.vue'
+import { store } from "./store/store"
 import { routes } from "./routes/routes";
+import axios from 'axios';
 
 // fontawesome imports
 import { library } from '@fortawesome/fontawesome-svg-core'
@@ -12,7 +14,7 @@ library.add(faCar)
 
 Vue.config.productionTip = false
 
-Vue.use(VueRouter);
+Vue.use(VueRouter,axios);
 
 const router = new VueRouter({
   routes, 
@@ -20,6 +22,7 @@ const router = new VueRouter({
 })
 
 new Vue({
+  store,
   router,
   render: h => h(App),
 }).$mount('#app')

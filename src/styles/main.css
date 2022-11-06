@@ -150,4 +150,28 @@ main {
   flex-wrap: wrap;
   padding: 1.4rem;
   width: calc(100vw - 20rem);
+}
+
+.page-fade-up {
+  opacity: 0;
+  -webkit-animation: fade-up 0.5s forwards;
+          animation: fade-up 0.5s forwards;
+}
+
+@-webkit-keyframes fade-up {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }/*# sourceMappingURL=main.css.map */

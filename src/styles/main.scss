@@ -74,3 +74,12 @@ main {
     padding:$main-padding;
     width: calc(100vw - 20rem);
 }
+
+.page-fade-up {
+    opacity: 0;
+    animation: fade-up 0.5s forwards;
+}
+@keyframes fade-up {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
