@@ -1,9 +1,7 @@
 import Vue from 'vue'
-import VueRouter from 'vue-router'
 import App from './App.vue'
 import { store } from "./store/store"
-import { routes } from "./routes/routes";
-import axios from 'axios';
+import { router } from "./routes/routes"
 
 // fontawesome imports
 import { library } from '@fortawesome/fontawesome-svg-core'
@@ -13,13 +11,6 @@ Vue.component('font-awesome-icon', FontAwesomeIcon)
 library.add(faCar)
 
 Vue.config.productionTip = false
-
-Vue.use(VueRouter,axios);
-
-const router = new VueRouter({
-  routes, 
-  mode : 'history' 
-})
 
 new Vue({
   store,

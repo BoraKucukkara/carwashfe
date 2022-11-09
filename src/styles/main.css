@@ -96,7 +96,7 @@ meter {
   -webkit-user-drag: element;
 }
 
-#app {
+.dashboard {
   display: flex;
   flex-wrap: wrap;
   width: 100vw;
@@ -146,8 +146,6 @@ nav ul li a {
 }
 
 main {
-  display: flex;
-  flex-wrap: wrap;
   padding: 1.4rem;
   width: calc(100vw - 20rem);
 }
@@ -174,4 +172,35 @@ main {
   to {
     opacity: 1;
   }
+}
+.login-control {
+  font-family: "Poppins", sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  background: rgb(255, 255, 255);
+}
+.login-control form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  background-color: #eee;
+  padding: 1.4rem;
+  border-radius: 0.5rem;
+  box-shadow: 0rem 0rem 0.5rem hsla(0deg, 0%, 0%, 0.1);
+}
+.login-control form input {
+  padding: 1rem;
+  background-color: rgb(255, 255, 255);
+  border-radius: inherit;
+  border: 1px solid #b5b5b5;
+}
+.login-control form button {
+  border-radius: inherit;
+  padding: 0.5rem;
+  background-color: rgb(226, 101, 23);
+  color: white;
+  text-align: center;
 }/*# sourceMappingURL=main.css.map */

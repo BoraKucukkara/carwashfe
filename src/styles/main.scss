@@ -2,6 +2,7 @@
 @use 'reset';
 
 //ui-constants
+$sidebar-width: 20rem;
 $main-shadow: 0rem 0rem 0.5rem hsla(0, 0%, 0%, 0.1);
 $main-padding:1.4rem;
 $main-radius: .5rem;
@@ -14,8 +15,8 @@ $color-secondary: rgb(37, 22, 86);
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 $font-family: 'Poppins', sans-serif;
 
-// Main APP
-#app{
+// Main Dashboard
+.dashboard{
     display:flex;
     flex-wrap: wrap;
     width: 100vw;
@@ -29,7 +30,7 @@ nav {
         display:flexbox;
         justify-content: center;
         align-items: center;
-        width: 20rem;
+        width: $sidebar-width;
         height: calc(100vh - 3.2rem);
         background: #eee;
         padding: 1rem;
@@ -69,10 +70,8 @@ nav {
 
 // Dashboard Content
 main {
-    display:flex;
-    flex-wrap: wrap;
     padding:$main-padding;
-    width: calc(100vw - 20rem);
+    width: calc(100vw - $sidebar-width);
 }
 
 .page-fade-up {
@@ -82,4 +81,37 @@ main {
 @keyframes fade-up {
     from {opacity: 0;}
     to {opacity: 1;}
+}
+
+.login-control {
+    font-family: $font-family;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    background: rgb(255, 255, 255);
+    form {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        background-color: #eee;
+        padding: $main-padding;
+        border-radius: $main-radius;
+        box-shadow: $main-shadow;
+        input {
+            padding: 1rem;
+            background-color: rgb(255, 255, 255);
+            border-radius: inherit;
+            border: 1px solid #b5b5b5;
+        }
+        button {
+            border-radius: inherit;
+            padding: 0.5rem;
+            background-color: $color-primary;
+            color: white;
+            text-align: center;
+        }
+    }
+    
 }

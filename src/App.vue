@@ -1,24 +1,22 @@
 <template>
-  <div id="app" class="page-fade-up">
-    <topBar />
-    <sideBar/>
-    <main>
-      <router-view></router-view>
-    </main>
+  <div id="app" class="">
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-import sideBar from "./components/sideBar.vue"
-import topBar from "./components/topBar.vue"
 export default {
   name: 'App',
   components: {
-    sideBar,
-    topBar
-  }
+  },
+  data() {
+        return {
+        }
+    },
+    methods: {
+    }
 }
 </script>
 <style>
-@import url("./styles/main.css");
+@import url("@/styles/main.css");
 </style>
