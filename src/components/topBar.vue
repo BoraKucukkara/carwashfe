@@ -2,8 +2,10 @@
     <div class="top-bar">
         <p class="logo"><font-awesome-icon icon="fa-solid fa-car" /> Car Wash CRM</p>
         <ul>
-            <li v-if="this.$store.getters.isAuth !== ''">{{this.$store.state.userAuth.user.name + " " +  this.$store.state.userAuth.user.surname}}</li>
-            <li>log out</li>
+            <li v-if="this.$store.getters.isAuth !== ''">
+                {{this.$store.state.userAuth.user.name + " " +  this.$store.state.userAuth.user.surname}}
+            </li>
+            <li><a href="#" @click="logout">Logout</a></li>
         </ul>
     </div>
 </template>
@@ -13,6 +15,10 @@ export default {
         return{
         }
     },
+    methods:{
+        logout() {
+            this.$store.dispatch("logout")
+        }
+    } 
 }
-
 </script>

@@ -2,6 +2,7 @@
 <template>
     <div class="login-control page-fade-up">
         <form @submit.prevent="submit">
+            <p v-if="this.$store.state.logoutConfirm">{{this.$store.state.logoutConfirm.message}}</p>
             <p>Login</p>
             <input v-model="email" type="text">
             <input v-model="password" type="text">
