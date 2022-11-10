@@ -195,26 +195,44 @@ main {
   width: 100vw;
   height: 100vh;
 }
-.login-control div {
+.login-control .login-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 90vw;
-  height: 90vh;
-  -webkit-animation: login-showup 1s ease-in-out forwards;
-          animation: login-showup 1s ease-in-out forwards;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  height: -webkit-max-content;
+  height: -moz-max-content;
+  height: max-content;
+  -webkit-animation: login-showup 1s ease-out forwards;
+          animation: login-showup 1s ease-out forwards;
+  border-radius: 1.4rem;
 }
 .login-control picture {
   width: 25rem;
   height: 30rem;
   overflow: hidden;
   border-radius: 1.4rem 0 0 1.4rem;
+  position: relative;
 }
 .login-control picture img {
   width: 25rem;
   height: inherit;
   -o-object-fit: cover;
      object-fit: cover;
+}
+.login-control picture .glass {
+  width: 30rem;
+  border-radius: 0;
+  transform: rotateZ(-5deg);
+  height: 7rem;
+  filter: blur(0.2rem);
+  background-color: rgb(255, 255, 255);
+  position: absolute;
+  left: -2rem;
+  -webkit-animation: glass 1s ease-out forwards;
+          animation: glass 1s ease-out forwards;
 }
 .login-control form {
   display: flex;
@@ -245,21 +263,63 @@ main {
 @-webkit-keyframes login-showup {
   0% {
     opacity: 0;
-    transform: perspective(100rem) rotateX(10deg);
+    transform: perspective(100rem) rotateX(20deg);
+    box-shadow: 0rem 2rem 1rem hsla(0deg, 0%, 0%, 0.5);
+  }
+  50% {
+    opacity: 1;
+    transform: perspective(100rem) rotateX(5deg);
+    box-shadow: 0rem 0rem 0.5rem hsla(0deg, 0%, 0%, 0.1);
   }
   100% {
     opacity: 1;
     transform: perspective(100rem) rotateX(0deg);
+    box-shadow: 0rem 0rem 0.5rem hsla(0deg, 0%, 0%, 0.1);
   }
 }
 
 @keyframes login-showup {
   0% {
     opacity: 0;
-    transform: perspective(100rem) rotateX(10deg);
+    transform: perspective(100rem) rotateX(20deg);
+    box-shadow: 0rem 2rem 1rem hsla(0deg, 0%, 0%, 0.5);
+  }
+  50% {
+    opacity: 1;
+    transform: perspective(100rem) rotateX(5deg);
+    box-shadow: 0rem 0rem 0.5rem hsla(0deg, 0%, 0%, 0.1);
   }
   100% {
     opacity: 1;
     transform: perspective(100rem) rotateX(0deg);
+    box-shadow: 0rem 0rem 0.5rem hsla(0deg, 0%, 0%, 0.1);
+  }
+}
+@-webkit-keyframes glass {
+  0% {
+    top: 25rem;
+    opacity: 0.5;
+  }
+  50% {
+    top: 0em;
+    opacity: 0.7;
+  }
+  100% {
+    top: -2rem;
+    opacity: 0.7;
+  }
+}
+@keyframes glass {
+  0% {
+    top: 25rem;
+    opacity: 0.5;
+  }
+  50% {
+    top: 0em;
+    opacity: 0.7;
+  }
+  100% {
+    top: -2rem;
+    opacity: 0.7;
   }
 }/*# sourceMappingURL=main.css.map */

@@ -1,5 +1,7 @@
 <template>
-  <div id="app" class="">
+  <div id="app" class="dashboard">
+    <router-view name="top"></router-view>
+    <router-view name="side"></router-view>
     <router-view></router-view>
   </div>
 </template>

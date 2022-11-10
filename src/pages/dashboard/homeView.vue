@@ -1,17 +1,11 @@
 <template>
-    <div class="page-fade-up dashboard">
-        <top-bar />
-        <side-bar />
-        <main>
-            <h1>Başarıyla giriş yaptınız</h1>
-            <p>Daily Schedule</p>
-            <p></p>
-        </main>
-    </div>
+    <main class="page-fade-up">
+        <h1>Welcome</h1>
+        <p>Here is your daily schedule</p>
+        <p>Monthly earnings</p>
+    </main>
 </template>
 <script>
-import sideBar from "../../components/sideBar.vue"
-import topBar from "../../components/topBar.vue"
 //import axios from "axios"
 export default {
     data() {
@@ -19,10 +13,6 @@ export default {
             auth: {},
         }
         
-    },
-    components: {
-        sideBar,
-        topBar
     },
     methods: {
     },

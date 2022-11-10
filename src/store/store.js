@@ -14,6 +14,8 @@ export const store = new Vuex.Store({
         // UX Feedbacks
         logoutConfirm: "",
         loginConfirm: "",
+        // UI Elements
+        BTNlogin: "Login",
         // APIurls:
         BaseURL: "http://localhost/api/auth/",
         POSTlogin: "login",
