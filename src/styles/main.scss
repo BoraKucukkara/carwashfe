@@ -1,19 +1,26 @@
 // css reset
 @use 'reset';
 
-//ui-constants
+// ui-constants
+@use 'typography' as typo;
+
+// ⛭ main ui settings
 $sidebar-width: 20rem;
-$main-shadow: 0rem 0rem 0.5rem hsla(0, 0%, 0%, 0.1);
+$shadow-lg: 0rem 0rem 1rem hsla(0, 0%, 0%, 0.2);
+$shadow-sm: 0rem 0rem 0.3rem hsla(0, 0%, 0%, 0.15);
 $main-padding:1.4rem;
 $main-radius: .5rem;
 
-// color palette
-$color-primary: hsla(23, 82%, 49%, 1);
-$color-secondary: rgb(37, 22, 86);
+// 🎨 color palette
+$black:hsl(0, 0%, 30%);
+$color-primary: rgb(218, 34, 14);
+$color-secondary: hsla(254, 59%, 21%, 1);
 
-// Typography
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-$font-family: 'Poppins', sans-serif;
+// body constants
+body {
+    font-family: typo.$font-family;
+    color: $black;
+}
 
 // Main Dashboard
 .dashboard{
@@ -21,7 +28,6 @@ $font-family: 'Poppins', sans-serif;
     flex-wrap: wrap;
     width: 100vw;
     justify-content: left;
-    font-family: $font-family;
 }
 
 // Sidebar
@@ -69,7 +75,14 @@ nav {
 }
 button {
     cursor: pointer;
+    border-radius: 3rem;
+    min-width: 8rem;
+    width: max-content;
+    padding: 0.7rem 1.5rem 0.7rem 1.5rem;
+    text-align: center;
+
 }
+
 // Dashboard Content
 main {
     padding:$main-padding;
@@ -86,34 +99,63 @@ main {
 }
 
 .login-control {
-    font-family: $font-family;
     display: flex;
     justify-content: center;
     align-items: center;
     width: 100vw;
     height: 100vh;
-    background: rgb(255, 255, 255);
+    div {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 90vw;
+        height: 90vh;
+        animation: login-showup 1s ease-in-out forwards;
+    }
+    picture {
+        width: 25rem;
+        height: 30rem;
+        overflow:hidden;
+        border-radius: 1.4rem 0 0 1.4rem;
+        img {
+            width: 25rem;
+            height: inherit;
+            object-fit:cover;
+        }
+    }
     form {
         display: flex;
         flex-direction: column;
+        justify-content: center;
         gap: 1rem;
-        background-color: rgb(255, 255, 255);
-        padding: $main-padding;
-        border-radius: $main-radius;
-        box-shadow: $main-shadow;
+        width: 25rem;
+        height: 30rem;
+        padding: 1rem 3rem 1rem 3rem;
+        border-radius: 0 1.4rem 1.4rem 0;
+        box-shadow: $shadow-sm;
+        background-color: #fff;
         input {
             padding: 1rem;
             background-color: rgb(255, 255, 255);
-            border-radius: inherit;
+            border-radius: $main-radius;
             border: 1px solid #d0d0d0;
         }
         button {
-            border-radius: inherit;
-            padding: 0.5rem;
             background-color: $color-primary;
             color: white;
-            text-align: center;
+        }
+        h1 {
+            font: typo.$font-h1
         }
     }
-    
+}
+@keyframes login-showup {
+    0% {
+        opacity: 0;
+        transform: perspective(100rem) rotateX(10deg);
+    }
+    100% {
+        opacity: 1;
+        transform: perspective(100rem) rotateX(0deg);
+    }
 }

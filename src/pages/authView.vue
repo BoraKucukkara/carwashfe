@@ -1,13 +1,16 @@
 /* eslint-disable */
 <template>
-    <div class="login-control page-fade-up">
-        <form @submit.prevent="submit">
-            <p v-if="this.$store.state.logoutConfirm">{{this.$store.state.logoutConfirm.message}}</p>
-            <p>Login</p>
-            <input v-model="email" type="text">
-            <input v-model="password" type="text">
-            <button type="submit">Login</button>    
-        </form>
+    <div class="login-control">
+        <div>
+            <picture><img src="../assets/carwashcrm.jpg" /></picture>
+            <form @submit.prevent="submit">
+                <p v-if="this.$store.state.logoutConfirm">{{this.$store.state.logoutConfirm.message}}</p>
+                <h1>Login</h1>
+                <input v-model="email" type="text">
+                <input v-model="password" type="text">
+                <button type="submit">Login</button>    
+            </form>     
+        </div>
     </div>
 </template>
 <script>

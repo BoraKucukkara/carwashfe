@@ -7,11 +7,13 @@ Vue.use(Vuex);
 
 export const store = new Vuex.Store({
     state : {
+        // Authorization
         userAuth: {
             access_token: ""
         },
-        //
+        // UX Feedbacks
         logoutConfirm: "",
+        loginConfirm: "",
         // APIurls:
         BaseURL: "http://localhost/api/auth/",
         POSTlogin: "login",

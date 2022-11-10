@@ -96,12 +96,16 @@ meter {
   -webkit-user-drag: element;
 }
 
+body {
+  font-family: "Poppins", sans-serif;
+  color: hsl(0deg, 0%, 30%);
+}
+
 .dashboard {
   display: flex;
   flex-wrap: wrap;
   width: 100vw;
   justify-content: left;
-  font-family: "Poppins", sans-serif;
 }
 
 nav ul {
@@ -147,6 +151,13 @@ nav ul li a {
 
 button {
   cursor: pointer;
+  border-radius: 3rem;
+  min-width: 8rem;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  padding: 0.7rem 1.5rem 0.7rem 1.5rem;
+  text-align: center;
 }
 
 main {
@@ -178,33 +189,77 @@ main {
   }
 }
 .login-control {
-  font-family: "Poppins", sans-serif;
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100vw;
   height: 100vh;
-  background: rgb(255, 255, 255);
+}
+.login-control div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 90vw;
+  height: 90vh;
+  -webkit-animation: login-showup 1s ease-in-out forwards;
+          animation: login-showup 1s ease-in-out forwards;
+}
+.login-control picture {
+  width: 25rem;
+  height: 30rem;
+  overflow: hidden;
+  border-radius: 1.4rem 0 0 1.4rem;
+}
+.login-control picture img {
+  width: 25rem;
+  height: inherit;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 .login-control form {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   gap: 1rem;
-  background-color: rgb(255, 255, 255);
-  padding: 1.4rem;
-  border-radius: 0.5rem;
-  box-shadow: 0rem 0rem 0.5rem hsla(0deg, 0%, 0%, 0.1);
+  width: 25rem;
+  height: 30rem;
+  padding: 1rem 3rem 1rem 3rem;
+  border-radius: 0 1.4rem 1.4rem 0;
+  box-shadow: 0rem 0rem 0.3rem hsla(0deg, 0%, 0%, 0.15);
+  background-color: #fff;
 }
 .login-control form input {
   padding: 1rem;
   background-color: rgb(255, 255, 255);
-  border-radius: inherit;
+  border-radius: 0.5rem;
   border: 1px solid #d0d0d0;
 }
 .login-control form button {
-  border-radius: inherit;
-  padding: 0.5rem;
-  background-color: hsl(23deg, 82%, 49%);
+  background-color: rgb(218, 34, 14);
   color: white;
-  text-align: center;
+}
+.login-control form h1 {
+  font: 200 2.4rem "Poppins", sans-serif;
+}
+
+@-webkit-keyframes login-showup {
+  0% {
+    opacity: 0;
+    transform: perspective(100rem) rotateX(10deg);
+  }
+  100% {
+    opacity: 1;
+    transform: perspective(100rem) rotateX(0deg);
+  }
+}
+
+@keyframes login-showup {
+  0% {
+    opacity: 0;
+    transform: perspective(100rem) rotateX(10deg);
+  }
+  100% {
+    opacity: 1;
+    transform: perspective(100rem) rotateX(0deg);
+  }
 }/*# sourceMappingURL=main.css.map */

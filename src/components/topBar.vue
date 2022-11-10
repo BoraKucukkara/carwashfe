@@ -3,7 +3,7 @@
         <p class="logo"><font-awesome-icon icon="fa-solid fa-car" /> Car Wash CRM</p>
         <ul>
             <li v-if="this.$store.getters.isAuth !== ''">
-                {{this.$store.state.userAuth.user.name + " " +  this.$store.state.userAuth.user.surname}}
+                Welcome, {{this.$store.state.userAuth.user.name}}
             </li>
             <li><a href="#" @click="logout">Logout</a></li>
         </ul>
