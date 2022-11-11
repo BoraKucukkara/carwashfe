@@ -143,11 +143,15 @@ main input[type=number] {
   border-radius: 0.5rem;
   background-color: #eee;
 }
+main ul {
+  padding-bottom: 2rem;
+}
 main li {
   border-bottom: 1px solid #eee;
   padding: 1.4rem;
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 main button {
   margin: 1rem;
@@ -384,4 +388,44 @@ button {
     top: -2rem;
     opacity: 0.7;
   }
+}
+.job-list li {
+  border: 1px solid rgb(229, 229, 229);
+  padding: 1rem;
+  border-radius: 0.5rem;
+  margin-bottom: 0.2rem;
+  background-color: rgb(245, 245, 245);
+  display: grid;
+  grid-template-columns: 2fr 4fr 1fr 1fr;
+  grid-gap: 0rem;
+}
+.job-list .plate-number {
+  border-radius: 0.5rem;
+  border: 0.2rem solid rgb(154, 154, 154);
+  background-color: #eee;
+  color: rgb(218, 34, 14);
+  font-size: 1.2rem;
+  font-weight: 500;
+  padding: 0 1rem;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  text-align: center;
+  margin-bottom: 0.2rem;
+}
+.job-list .btn-start {
+  background-color: rgb(64, 153, 1);
+}
+.job-list .btn-finish {
+  background-color: rgb(218, 34, 14);
+}
+.job-list .btn {
+  color: white;
+  border-radius: 1rem;
+  padding: 0.3rem 0rem;
+  width: 6rem;
+  text-align: center;
+}
+.job-list .job-active {
+  background-color: antiquewhite;
 }/*# sourceMappingURL=main.css.map */
