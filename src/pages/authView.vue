@@ -7,9 +7,11 @@
                 <p v-if="this.$store.state.logoutConfirm">{{this.$store.state.logoutConfirm.message}}</p>
                 <h1>Login</h1>
                 <input v-model="email" type="text">
-                <input v-model="password" type="text">
+                <input v-model="password" type="password">
                 <button type="submit">Login <font-awesome-icon v-if="load" icon="fa-solid fa-spinner" spin/></button>
-            </form>     
+                <p>Don't have an account? <a href="#" class="btn-sm">Register Here</a></p>   
+            </form>
+              
         </div>
     </div>
 </template>

@@ -11,17 +11,21 @@ export const store = new Vuex.Store({
         userAuth: {
             access_token: ""
         },
+        serviceData: {
+            data: []
+        },
         // UX Feedbacks
         logoutConfirm: "",
         loginConfirm: "",
         // UI Elements
         BTNlogin: "Login",
         // APIurls:
-        BaseURL: "http://localhost/api/auth/",
-        POSTlogin: "login",
-        POSTlogout:"logout",
-        POSTregister:"register",
-        GETprofile:"user-profile"
+        BaseURL: "http://localhost/api/",
+        POSTlogin: "auth/login",
+        POSTlogout:"auth/logout",
+        POSTregister:"auth/register",
+        GETprofile:"auth/user-profile",
+        GETservices:"services"
     },
     getters : {
         isAuth(state) {
@@ -35,6 +39,9 @@ export const store = new Vuex.Store({
         clearAuth(state, data) {
             state.userAuth.access_token = ""
             state.logoutConfirm = data
+        },
+        setServices(state,data){
+            state.serviceData = data
         }
     },
     actions : {
@@ -54,7 +61,16 @@ export const store = new Vuex.Store({
                 {"headers": {"Authorization": "Bearer " + this.state.userAuth.access_token}}
             ).then(response => {
                 commit("clearAuth", response.data),
-                router.push("/auth")
+                router.push("/login")
+                console.log(response.data)
+            })
+        },
+        getServices({commit}) {
+            axios.get(
+                this.state.BaseURL + this.state.GETservices, 
+                {"headers": {"Authorization": "Bearer " + this.state.userAuth.access_token}}
+            ).then(response => {
+                commit("setServices", response.data),
                 console.log(response.data)
             })
         }

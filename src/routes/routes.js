@@ -21,7 +21,7 @@ export const router = new VueRouter({
                 if(store.getters.isAuth){
                     next("/dashboard")
                 } else {
-                    next("/auth")
+                    next("/login")
                 }
             }
         },
@@ -48,7 +48,7 @@ export const router = new VueRouter({
             }
         },
         { 
-            path: "/auth",
+            path: "/login",
             component : Auth,
             beforeEnter(to,from,next) {
                 if(store.getters.isAuth){
