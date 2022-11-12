@@ -12,8 +12,10 @@ import { faPlay } from '@fortawesome/free-solid-svg-icons'
 import { faSoap } from '@fortawesome/free-solid-svg-icons'
 import { faCircleCheck } from '@fortawesome/free-solid-svg-icons'
 import { faClockRotateLeft } from '@fortawesome/free-solid-svg-icons'
+import { faGear } from '@fortawesome/free-solid-svg-icons'
+import { faPowerOff } from '@fortawesome/free-solid-svg-icons'
 Vue.component('font-awesome-icon', FontAwesomeIcon)
-library.add(faCar,faSpinner,faPlay,faSoap,faCircleCheck,faClockRotateLeft)
+library.add(faCar,faSpinner,faPlay,faSoap,faCircleCheck,faClockRotateLeft,faGear,faPowerOff)
 
 Vue.config.productionTip = false
 

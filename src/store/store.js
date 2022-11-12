@@ -27,6 +27,7 @@ export const store = new Vuex.Store({
         POSTlogin: "auth/login",
         POSTlogout:"auth/logout",
         POSTregister:"auth/register",
+        POSTrefresh:"auth/refresh",
         GETprofile:"auth/user-profile",
         GETservices:"services"
     },
@@ -36,8 +37,18 @@ export const store = new Vuex.Store({
         }
     },
 	mutations : {
-        setAuth(state, data) {
+        setAuth(state, data) { // 
             state.userAuth.access_token = data
+        },
+        getLocalData(state) { // get localdata token and user data
+            let hasToken = localStorage.key("token")
+            let userData = localStorage.getItem("userData")
+            if(hasToken) {
+                let payload = JSON.parse(userData)
+                state.userAuth.access_token = localStorage.getItem("token")
+                state.userData = payload
+                router.push("/dashboard")
+            }
         },
         getProfile(state, data) {
             state.userData = data
@@ -73,6 +84,20 @@ export const store = new Vuex.Store({
                 localStorage.clear()
                 router.push("/login")
                 console.log(response.data)
+            }).catch(error => {
+                commit("clearAuth", error.data),
+                localStorage.clear()
+                router.push("/login")
+            })
+        },
+        refreshToken({commit, state}) {
+            axios.post(
+                state.BaseURL + state.POSTrefresh, "",
+                {"headers": {"Authorization": "Bearer " + localStorage.getItem("token")}}
+            ).then(response => {
+                commit("setAuth", response.data.access_token)
+                localStorage.removeItem("token")
+                localStorage.setItem("token",response.data.access_token)
             })
         },
         getServices({commit}) {

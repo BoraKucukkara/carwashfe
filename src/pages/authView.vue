@@ -5,6 +5,7 @@
             <picture><img src="../assets/carwashcrm.jpg" /><div class="glass"></div></picture>
             <form @submit.prevent="submit">
                 <p v-if="this.$store.state.logoutConfirm">{{this.$store.state.logoutConfirm.message}}</p>
+                <p v-if="this.userName !== ''">Welcome back, {{this.userName}}</p>
                 <h1>Login</h1>
                 <input v-model="email" type="text">
                 <input v-model="password" type="password">
@@ -21,14 +22,30 @@ export default {
         return {
                 email: "erich98@example.org",
                 password: "123456789",
-                load: false
+                load: false,
+                userName: ""
         }
     },
     methods: {
         submit() {
             this.$store.dispatch("login", {email: this.email, password: this.password})
             this.load = true
+        },
+        getLocalData() {
+        this.$store.commit("getLocalData")
+        },
+        rememberAuth() { // when user leave dashboard without logout, this function will remember the user. 
+            let storage = localStorage.getItem("userData")
+            if (storage) {
+                let lastUser = JSON.parse(storage)
+                this.userName = lastUser.name
+                this.$store.dispatch("refreshToken")
+            }
         }
+    },
+    created() {
+        this.rememberAuth()
+        this.getLocalData()
     }
 }
 </script>

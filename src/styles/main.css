@@ -105,18 +105,31 @@ meter {
 body {
   font-family: "Poppins", sans-serif;
   color: hsl(0deg, 0%, 30%);
+  margin: 0;
 }
 
 .dashboard {
-  display: flex;
-  flex-wrap: wrap;
-  width: 100vw;
-  justify-content: left;
+  display: grid;
+  grid-template-columns: 15rem 1fr;
+  grid-template-rows: 3.2rem 1fr 3rem;
+  grid-template-areas: "side-bar top-bar" "side-bar main" "side-bar footer";
+  height: 100vh;
+}
+.dashboard .grid-top {
+  grid-area: top-bar;
+}
+.dashboard .grid-main {
+  grid-area: main;
+}
+.dashboard .grid-sidebar {
+  grid-area: side-bar;
+}
+.dashboard .grid-footer {
+  grid-area: footer;
 }
 
 main {
   padding: 1.4rem;
-  width: calc(100vw - 18rem);
 }
 main h1 {
   font: 200 2.4rem "Poppins", sans-serif;
@@ -159,12 +172,17 @@ main button {
   color: white;
 }
 
+nav {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  box-shadow: 0rem 0rem 1rem hsla(0deg, 0%, 0%, 0.2);
+}
 nav ul {
-  display: flexbox;
-  justify-content: center;
-  align-items: center;
-  width: 18rem;
-  height: calc(100vh - 3.2rem);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  height: 100%;
   background: #eee;
   padding: 1rem;
 }
@@ -185,8 +203,7 @@ nav ul li a {
   justify-content: space-between;
   align-items: center;
   color: white;
-  height: 3.2rem;
-  width: 100vw;
+  width: 100%;
   background-color: hsl(264deg, 5%, 18%);
 }
 .top-bar ul > li {
@@ -200,60 +217,6 @@ nav ul li a {
   color: rgb(219, 219, 219);
 }
 
-button {
-  cursor: pointer;
-  border-radius: 3rem;
-  min-width: 8rem;
-  width: -webkit-max-content;
-  width: -moz-max-content;
-  width: max-content;
-  padding: 0.7rem 1.5rem 0.7rem 1.5rem;
-  text-align: center;
-}
-
-.btn-sm {
-  cursor: pointer;
-  border-radius: 1rem;
-  min-width: -webkit-min-content;
-  min-width: -moz-min-content;
-  min-width: min-content;
-  width: -webkit-max-content;
-  width: -moz-max-content;
-  width: max-content;
-  padding: 0.1rem 0.6rem 0.1rem 0.6rem;
-  text-align: center;
-  border: 0.1rem solid hsl(280deg, 2%, 66%);
-  font: 400 0.8rem "Poppins", sans-serif;
-  color: hsl(280deg, 2%, 66%);
-}
-.btn-sm:hover {
-  border: 0.1rem solid rgb(218, 34, 14);
-  color: rgb(218, 34, 14);
-}
-
-.page-fade-up {
-  opacity: 0;
-  -webkit-animation: fade-up 0.5s forwards;
-          animation: fade-up 0.5s forwards;
-}
-
-@-webkit-keyframes fade-up {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes fade-up {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
 .login-control {
   display: flex;
   justify-content: center;
@@ -387,6 +350,60 @@ button {
   100% {
     top: -2rem;
     opacity: 0.7;
+  }
+}
+button {
+  cursor: pointer;
+  border-radius: 3rem;
+  min-width: 8rem;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  padding: 0.7rem 1.5rem 0.7rem 1.5rem;
+  text-align: center;
+}
+
+.btn-sm {
+  cursor: pointer;
+  border-radius: 1rem;
+  min-width: -webkit-min-content;
+  min-width: -moz-min-content;
+  min-width: min-content;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  padding: 0.1rem 0.6rem 0.1rem 0.6rem;
+  text-align: center;
+  border: 0.1rem solid hsl(280deg, 2%, 66%);
+  font: 400 0.8rem "Poppins", sans-serif;
+  color: hsl(280deg, 2%, 66%);
+}
+.btn-sm:hover {
+  border: 0.1rem solid rgb(218, 34, 14);
+  color: rgb(218, 34, 14);
+}
+
+.page-fade-up {
+  opacity: 0;
+  -webkit-animation: fade-up 0.5s forwards;
+          animation: fade-up 0.5s forwards;
+}
+
+@-webkit-keyframes fade-up {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }
 .job-list li {
