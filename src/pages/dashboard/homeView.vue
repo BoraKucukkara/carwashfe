@@ -11,9 +11,8 @@ import jobList from "../../components/jobList.vue"
 export default {
     data() {
         return {
-            auth: {},
+            
         }
-        
     },
     components: {
         jobList
@@ -21,7 +20,6 @@ export default {
     methods: {
     },
     created() {
-
     }
 }
 </script>

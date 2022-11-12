@@ -11,6 +11,9 @@ export const store = new Vuex.Store({
         userAuth: {
             access_token: ""
         },
+        userData: {
+        },
+        // Services 
         serviceData: {
             data: []
         },
@@ -18,7 +21,7 @@ export const store = new Vuex.Store({
         logoutConfirm: "",
         loginConfirm: "",
         // UI Elements
-        BTNlogin: "Login",
+
         // APIurls:
         BaseURL: "http://localhost/api/",
         POSTlogin: "auth/login",
@@ -34,7 +37,10 @@ export const store = new Vuex.Store({
     },
 	mutations : {
         setAuth(state, data) {
-            state.userAuth = data
+            state.userAuth.access_token = data
+        },
+        getProfile(state, data) {
+            state.userData = data
         },
         clearAuth(state, data) {
             state.userAuth.access_token = ""
@@ -50,25 +56,29 @@ export const store = new Vuex.Store({
                 state.BaseURL + state.POSTlogin,
                 {email: submited.email, password: submited.password}
             ).then(response => {
-                commit("setAuth", response.data)
+                commit("setAuth", response.data.access_token)
+                localStorage.setItem("token",response.data.access_token)
+                commit("getProfile", response.data.user)
+                localStorage.setItem("userData",JSON.stringify(response.data.user))
                 router.push("/dashboard")
                 console.log(response.data)
             })
         },
-        logout({commit}) {
+        logout({commit, state}) {
             axios.post(
-                this.state.BaseURL + this.state.POSTlogout, "",
-                {"headers": {"Authorization": "Bearer " + this.state.userAuth.access_token}}
+                state.BaseURL + state.POSTlogout, "",
+                {"headers": {"Authorization": "Bearer " + state.userAuth.access_token}}
             ).then(response => {
                 commit("clearAuth", response.data),
+                localStorage.clear()
                 router.push("/login")
                 console.log(response.data)
             })
         },
         getServices({commit}) {
             axios.get(
-                this.state.BaseURL + this.state.GETservices, 
-                {"headers": {"Authorization": "Bearer " + this.state.userAuth.access_token}}
+                this.state.BaseURL + this.state.GETservices,
+                {"headers": {"Authorization": "Bearer " + localStorage.getItem("token")}}
             ).then(response => {
                 commit("setServices", response.data),
                 console.log(response.data)

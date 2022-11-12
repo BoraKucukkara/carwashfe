@@ -259,10 +259,13 @@ button {
         grid-template-columns:2fr 4fr 1fr 1fr;
         grid-gap:0rem;
     }
+    h3 {
+        margin: .5rem 0;
+    }
     .plate-number {
         border-radius: $main-radius;
         border:.2rem solid rgb(154, 154, 154);
-        background-color: #eee;
+        background-color: white;
         color: $color-primary;
         font-size: 1.2rem;
         font-weight: 500;
@@ -277,14 +280,29 @@ button {
     .btn-finish {
         background-color: $color-primary;
     }
+    .btn-archive {
+        background-color: $gray;
+    }
     .btn {
         color:white;
         border-radius: 1rem;
         padding: .3rem 0rem;
-        width: 6rem;
+        width: 8rem;
+        height: 3rem;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
         text-align: center;
     }
     .job-active {
         background-color: antiquewhite;
+        animation: active-job ease .5s infinite;
+        @keyframes active-job {
+            0% {border-color: rgb(255, 184, 91);}
+            50% {border-color: rgb(254, 219, 173);}
+            100% {border-color: rgb(255, 184, 91);}
+            
+        }
     }
+    
 }

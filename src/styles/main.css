@@ -399,10 +399,13 @@ button {
   grid-template-columns: 2fr 4fr 1fr 1fr;
   grid-gap: 0rem;
 }
+.job-list h3 {
+  margin: 0.5rem 0;
+}
 .job-list .plate-number {
   border-radius: 0.5rem;
   border: 0.2rem solid rgb(154, 154, 154);
-  background-color: #eee;
+  background-color: white;
   color: rgb(218, 34, 14);
   font-size: 1.2rem;
   font-weight: 500;
@@ -419,13 +422,44 @@ button {
 .job-list .btn-finish {
   background-color: rgb(218, 34, 14);
 }
+.job-list .btn-archive {
+  background-color: hsl(280deg, 2%, 66%);
+}
 .job-list .btn {
   color: white;
   border-radius: 1rem;
   padding: 0.3rem 0rem;
-  width: 6rem;
+  width: 8rem;
+  height: 3rem;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
   text-align: center;
 }
 .job-list .job-active {
   background-color: antiquewhite;
+  -webkit-animation: active-job ease 0.5s infinite;
+          animation: active-job ease 0.5s infinite;
+}
+@-webkit-keyframes active-job {
+  0% {
+    border-color: rgb(255, 184, 91);
+  }
+  50% {
+    border-color: rgb(254, 219, 173);
+  }
+  100% {
+    border-color: rgb(255, 184, 91);
+  }
+}
+@keyframes active-job {
+  0% {
+    border-color: rgb(255, 184, 91);
+  }
+  50% {
+    border-color: rgb(254, 219, 173);
+  }
+  100% {
+    border-color: rgb(255, 184, 91);
+  }
 }/*# sourceMappingURL=main.css.map */

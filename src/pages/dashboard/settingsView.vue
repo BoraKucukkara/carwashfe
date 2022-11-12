@@ -3,9 +3,9 @@
         <h1>Account Settings</h1>
         <section>
             <span>Name / Surname</span>
-            <p>{{this.$store.state.userAuth.user.name}} {{this.$store.state.userAuth.user.surname}} <a class="btn-sm">edit</a></p>
+            <p>{{this.$store.state.userData.name}} {{this.$store.state.userData.surname}} <a class="btn-sm">edit</a></p>
             <span>E-mail</span>
-            <p>{{this.$store.state.userAuth.user.email}} <a class="btn-sm">change</a></p>
+            <p>{{this.$store.state.userData.email}} <a class="btn-sm">change</a></p>
             <span>Password</span>
             <p>********* <a class="btn-sm">reset</a></p>
         </section>
@@ -36,6 +36,6 @@ export default {
     },
     mounted(){
         this.loadServices()
-    }
+    },
 }
 </script>
