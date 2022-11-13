@@ -26,10 +26,16 @@ export default {
         } else {
           this.screenSelector = "dashboard"
         }
+      },
+      checkSession() {
+        this.$store.dispatch("refreshToken")
       }
     },
     created() {
       this.classSelector()
+    },
+    beforeMount() {
+      this.checkSession() 
     },
     watch: { // dedects route and changes layout class in DOM
       '$route' (){ 

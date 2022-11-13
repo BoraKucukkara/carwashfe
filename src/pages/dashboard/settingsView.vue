@@ -11,6 +11,18 @@
         </section>
         <section>
             <h2>Services</h2><a class="btn-sm">+ add service</a>
+            <div class="add-service-card">
+                <label for="service">Service name</label>
+                <input v-model="newService.name" name="service" type="text">
+                
+                <label for="cost">Cost</label>
+                <input v-model="newService.cost" name="cost" type="number">
+
+                <label for="price">Price</label>
+                <input v-model="newService.price" name="price" type="number">
+                <button class="btn-sm" @click="addNewService">Add Service</button>
+            </div>
+
             <p class="loader" v-if="this.$store.state.serviceData.data.length == 0" ><font-awesome-icon icon="fa-solid fa-spinner" spin/> Loading services</p>
             
             <ul>
@@ -26,13 +38,20 @@
 export default {
     data() {
         return{
+            newService: {
+                name: "",
+                cost: "",
+                price: ""
+            }
         }
     },
     methods:{
         loadServices(){
             this.$store.dispatch("getServices")
+        },
+        addNewService(){
+            this.$store.dispatch("addService", {name: this.newService.name, cost: this.newService.cost, price: this.newService.price})
         }
-        
     },
     mounted(){
         this.loadServices()

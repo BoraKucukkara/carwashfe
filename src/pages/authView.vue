@@ -4,7 +4,7 @@
         <div class="login-container">
             <picture><img src="../assets/carwashcrm.jpg" /><div class="glass"></div></picture>
             <form @submit.prevent="submit">
-                <p v-if="this.$store.state.logoutConfirm">{{this.$store.state.logoutConfirm.message}}</p>
+                <p v-if="this.$store.state.logoutConfirm">{{this.$store.state.logoutConfirm}}</p>
                 <p v-if="this.userName !== ''">Welcome back, {{this.userName}}</p>
                 <h1>Login</h1>
                 <input v-model="email" type="text">
@@ -39,7 +39,6 @@ export default {
             if (storage) {
                 let lastUser = JSON.parse(storage)
                 this.userName = lastUser.name
-                this.$store.dispatch("refreshToken")
             }
         }
     },
