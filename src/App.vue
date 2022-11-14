@@ -38,12 +38,13 @@ export default {
       this.checkSession() 
     },
     watch: { // dedects route and changes layout class in DOM
-      '$route' (){ 
+      '$route' (){
         this.routePath = this.$route.path
         if(this.routePath == "/login" ) {
           this.screenSelector = "login-control"
         } else {
           this.screenSelector = "dashboard"
+          this.$store.commit("pushError", "")
         }
       }
     }

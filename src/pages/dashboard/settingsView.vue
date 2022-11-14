@@ -20,14 +20,17 @@
 
                 <label for="price">Price</label>
                 <input v-model="newService.price" name="price" type="number">
-                <button class="btn-sm" @click="addNewService">Add Service</button>
+                <button class="btn-action" @click="addNewService">Add Service</button>
             </div>
+            <p class="errorMessage" v-if="this.$store.state.errorResponse.message" ><font-awesome-icon icon="fa-solid fa-circle-exclamation" />
+                {{this.$store.state.errorResponse.message}}
+            </p>
 
             <p class="loader" v-if="this.$store.state.serviceData.data.length == 0" ><font-awesome-icon icon="fa-solid fa-spinner" spin/> Loading services</p>
             
             <ul>
-                <li class="page-fade-up" v-for="service in this.$store.state.serviceData.data" :key="service.service_id">
-                    <h3>{{ service.name }}</h3> <div>Cost: $ <input type="number" :value="service.cost"> Price: $ <input type="number" :value="service.price"> </div>
+                <li class="page-fade-up" v-for="service in this.$store.state.serviceData.data.slice().reverse()" :key="service.service_id">
+                    <h3>{{ service.name }}</h3> <div>Cost: $ <input type="number" :value="service.cost"> Price: $ <input type="number" :value="service.price"> <a class="btn" href="#"><font-awesome-icon icon="fa-solid fa-trash" /></a></div>
                 </li>
             </ul>
             <button v-if="this.$store.state.serviceData.data.length !== 0">apply changes</button>

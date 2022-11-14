@@ -7,7 +7,7 @@
                 <div class=""><p class="plate-number">41 H 3242</p><p>Heinssen Björksen Stütgarden</p></div>
                 <div><p>Type: SUV</p><p>Services: Car Wash, Detailing, Engine Cleaning</p></div>
                 <h3>Price: $49</h3>
-                <a href="#" class="btn btn-finish">Finish <font-awesome-icon icon="fa-solid fa-circle-check"/></a>
+                <button class="btn btn-finish">Finish <font-awesome-icon icon="fa-solid fa-circle-check"/></button>
             </li>
         </ul>
 
@@ -17,7 +17,7 @@
                 <div class=""><p class="plate-number">41 H 3242</p><p>Heinssen Björksen Stütgarden</p></div>
                 <div><p>Type: SUV</p><p>Services: Car Wash</p></div>
                 <h3>Price: $23</h3>
-                <a href="#" class="btn btn-start">Start <font-awesome-icon icon="fa-solid fa-play"/></a>
+                <button  class="btn btn-start">Start <font-awesome-icon icon="fa-solid fa-play"/></button>
             </li>
             <li>
                 <div class=""><p class="plate-number">34 BP 9741</p><p>Heinssen Björksen Stütgarden</p></div>

@@ -152,7 +152,15 @@ main section {
 }
 main input[type=number] {
   width: 5rem;
-  padding: 0.2rem;
+  padding: 0.5rem;
+  margin: 0 1rem 0 0.2rem;
+  border-radius: 0.5rem;
+  background-color: #eee;
+}
+main input[type=text] {
+  width: 10rem;
+  margin: 0 1rem 0 0.5rem;
+  padding: 0.5rem;
   border-radius: 0.5rem;
   background-color: #eee;
 }
@@ -361,6 +369,11 @@ button {
   width: max-content;
   padding: 0.7rem 1.5rem 0.7rem 1.5rem;
   text-align: center;
+  transition: 0.3s all;
+  box-shadow: inset 0rem 0.5rem 1rem hsla(51deg, 100%, 96%, 0.2);
+}
+button:hover {
+  box-shadow: inset 0rem 0.6rem 1rem hsla(51deg, 100%, 96%, 0.3);
 }
 
 .btn-sm {
@@ -381,6 +394,24 @@ button {
 .btn-sm:hover {
   border: 0.1rem solid rgb(218, 34, 14);
   color: rgb(218, 34, 14);
+}
+
+.btn-action {
+  cursor: pointer;
+  border-radius: 1rem;
+  min-width: -webkit-min-content;
+  min-width: -moz-min-content;
+  min-width: min-content;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  height: -webkit-max-content;
+  height: -moz-max-content;
+  height: max-content;
+  padding: 0.5rem 0.8rem;
+  text-align: center;
+  font: 400 0.8rem "Poppins", sans-serif;
+  color: white;
 }
 
 .page-fade-up {
@@ -478,5 +509,45 @@ button {
   }
   100% {
     border-color: rgb(255, 184, 91);
+  }
+}
+
+.errorMessage {
+  color: rgb(218, 34, 14);
+  -webkit-animation: error 0.5s ease 1;
+          animation: error 0.5s ease 1;
+}
+@-webkit-keyframes error {
+  0% {
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  40% {
+    opacity: 0;
+  }
+  60% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes error {
+  0% {
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  40% {
+    opacity: 0;
+  }
+  60% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
   }
 }/*# sourceMappingURL=main.css.map */

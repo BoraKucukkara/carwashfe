@@ -17,20 +17,31 @@ export const store = new Vuex.Store({
         serviceData: {
             data: [] 
         },
+        customerData: {
+            data: []
+        },
         // UX Feedbacks
         logoutConfirm: "",
         loginConfirm: "",
+        errorResponse: {},
         // UI Elements
 
         // APIurls:
         BaseURL: "http://localhost/api/",
-        POSTlogin: "auth/login",
-        POSTlogout:"auth/logout",
-        POSTregister:"auth/register",
-        POSTrefresh:"auth/refresh",
-        GETprofile:"auth/user-profile",
-        GETservices:"services",
-        POSTservice:"services/add"
+        // Auth
+            POSTlogin: "auth/login",
+            POSTlogout:"auth/logout",
+            POSTregister:"auth/register",
+            POSTrefresh:"auth/refresh",
+            GETprofile:"auth/user-profile",
+        // Services
+            GETservices:"services",
+            POSTserviceAdd:"services/add",
+            POSTserviceDelete:"services/delete",
+        // Costumers 
+            GETcustomers:"customers",
+            POSTcustomerAdd:"customers/add"
+
     },
     getters : {
         isAuth(state) {
@@ -56,13 +67,18 @@ export const store = new Vuex.Store({
         },
         clearAuth(state, data) { // clears token data after logout action
             state.userAuth.access_token = ""
-            if(data.success) {
+            if(data && data.success) {
                 state.logoutConfirm = state.userData.name + ", successfully logged out" // UX feedback 
             }
-            
         },
         setServices(state,data){
             state.serviceData = data
+        },
+        setCustomers(state,data){
+            state.customerData = data
+        },
+        pushError(state,data) {
+            state.errorResponse = data
         }
     },
     actions : {
@@ -77,7 +93,6 @@ export const store = new Vuex.Store({
                 commit("getProfile", response.data.user)
                 localStorage.setItem("userData",JSON.stringify(response.data.user))
                 router.push("/dashboard")
-                console.log(response.data)
             })
         },
         logout({commit, state}) {
@@ -124,13 +139,40 @@ export const store = new Vuex.Store({
         },
         addService({state},payload) {
             axios.post(
-                state.BaseURL + state.POSTservice,
+                state.BaseURL + state.POSTserviceAdd,
                 {name: payload.name, cost: payload.cost, price: payload.price},
                 {"headers": {"Authorization": "Bearer " + state.userAuth.access_token}}
             ).then(response => {
                 this.dispatch("getServices")
+                this.commit("pushError", null)
+                return response
+            }).catch(error => {
+                this.commit("pushError", JSON.parse(error.request.response))
+            })
+        },
+
+        // COSTUMER CONTROLS
+        getCustomers({commit}) {
+            axios.get(
+                this.state.BaseURL + this.state.GETcustomers,
+                {"headers": {"Authorization": "Bearer " + localStorage.getItem("token")}}
+            ).then(response => {
+                commit("setCustomers", response.data)
                 return response
             })
+        },
+        addCustomer({state},payload) {
+            axios.post(
+                state.BaseURL + state.POSTcustomerAdd,
+                {name: payload.name, surname: payload.surname, phone: payload.phone},
+                {"headers": {"Authorization": "Bearer " + state.userAuth.access_token}}
+            ).then(response => {
+                this.dispatch("getCustomers")
+                return response
+            }).catch(error => {
+                this.commit("pushError", JSON.parse(error.request.response))
+            })
         }
+
     }
 });
