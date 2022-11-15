@@ -169,7 +169,7 @@ main ul {
 }
 main li {
   border-bottom: 1px solid #eee;
-  padding: 1.4rem;
+  padding: 0.5rem 1rem 0.5rem 1rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -397,7 +397,6 @@ button:hover {
 }
 
 .btn-action {
-  cursor: pointer;
   border-radius: 1rem;
   min-width: -webkit-min-content;
   min-width: -moz-min-content;
@@ -514,6 +513,7 @@ button:hover {
 
 .errorMessage {
   color: rgb(218, 34, 14);
+  margin: 0.5rem;
   -webkit-animation: error 0.5s ease 1;
           animation: error 0.5s ease 1;
 }
@@ -550,4 +550,17 @@ button:hover {
   100% {
     opacity: 0;
   }
+}
+
+.add-data-card {
+  border: 1px solid #eee;
+  padding: 0.2rem 1rem;
+  border-radius: 0.5rem;
+  margin: 0.5rem 0rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.add-data-card p {
+  color: rgb(218, 34, 14);
 }/*# sourceMappingURL=main.css.map */

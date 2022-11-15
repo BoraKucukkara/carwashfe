@@ -23,7 +23,7 @@ export const store = new Vuex.Store({
         // UX Feedbacks
         logoutConfirm: "",
         loginConfirm: "",
-        errorResponse: {},
+        errorResponse: { message: "" },
         // UI Elements
 
         // APIurls:
@@ -37,7 +37,7 @@ export const store = new Vuex.Store({
         // Services
             GETservices:"services",
             POSTserviceAdd:"services/add",
-            POSTserviceDelete:"services/delete",
+            DELETEserviceDelete:"services/delete/",
         // Costumers 
             GETcustomers:"customers",
             POSTcustomerAdd:"customers/add"
@@ -78,7 +78,7 @@ export const store = new Vuex.Store({
             state.customerData = data
         },
         pushError(state,data) {
-            state.errorResponse = data
+            state.errorResponse.message = data.message
         }
     },
     actions : {
@@ -144,10 +144,20 @@ export const store = new Vuex.Store({
                 {"headers": {"Authorization": "Bearer " + state.userAuth.access_token}}
             ).then(response => {
                 this.dispatch("getServices")
-                this.commit("pushError", null)
+                this.commit("pushError", "")
                 return response
             }).catch(error => {
+                console.log(error)
                 this.commit("pushError", JSON.parse(error.request.response))
+            })
+        },
+        dellService({state},id) {
+            axios.delete(
+                state.BaseURL + state.DELETEserviceDelete + id,
+                {"headers": {"Authorization": "Bearer " + state.userAuth.access_token}}
+            ).then(response => {
+                this.dispatch("getServices")
+                return response
             })
         },
 
@@ -173,6 +183,5 @@ export const store = new Vuex.Store({
                 this.commit("pushError", JSON.parse(error.request.response))
             })
         }
-
     }
 });
