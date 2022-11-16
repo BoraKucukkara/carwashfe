@@ -20,6 +20,9 @@ export const store = new Vuex.Store({
         customerData: {
             data: []
         },
+        jobData: {
+            data: []
+        },
         // UX Feedbacks
         logoutConfirm: "",
         loginConfirm: "",
@@ -40,7 +43,9 @@ export const store = new Vuex.Store({
             DELETEserviceDelete:"services/delete/",
         // Costumers 
             GETcustomers:"customers",
-            POSTcustomerAdd:"customers/add"
+            POSTcustomerAdd:"customers/add",
+        // Jobs
+            GETjobs:"jobs/"
 
     },
     getters : {
@@ -79,6 +84,9 @@ export const store = new Vuex.Store({
         },
         pushError(state,data) {
             state.errorResponse.message = data.message
+        },
+        getJobs(state, data) {
+            state.jobData = data
         }
     },
     actions : {
@@ -181,6 +189,15 @@ export const store = new Vuex.Store({
                 return response
             }).catch(error => {
                 this.commit("pushError", JSON.parse(error.request.response))
+            })
+        },
+        // JOB CONTROLS
+        getJobList({state}) {
+            axios.get(
+                state.BaseURL + state.GETjobs,
+                {"headers": {"Authorization": "Bearer " + localStorage.getItem("token")}}
+            ).then(response => {
+                this.commit("getJobs", response.data)
             })
         }
     }

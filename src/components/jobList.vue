@@ -2,41 +2,64 @@
     <div>
         
         <ul class="job-list">
-            <h3><font-awesome-icon icon="fa-solid fa-soap"/> Active Jobs</h3>
-            <li class="job-active">
-                <div class=""><p class="plate-number">41 H 3242</p><p>Heinssen Björksen Stütgarden</p></div>
-                <div><p>Type: SUV</p><p>Services: Car Wash, Detailing, Engine Cleaning</p></div>
-                <h3>Price: $49</h3>
+            <h3><font-awesome-icon icon="fa-solid fa-soap"/> Washing in progress</h3>
+            <li class="job-active" v-for="job in filterActive" :key="job.job_id">
+                <div class=""><p class="plate-number">{{job.plate_number}}</p><p>{{job.customer.name}} {{job.customer.surname}}</p></div>
+                <div><p>Type: {{job.vehicle_type.name}}</p><p>{{job.service.name}}</p></div>
+                <h3>Price: ${{job.service.price}}</h3>
                 <button class="btn btn-finish">Finish <font-awesome-icon icon="fa-solid fa-circle-check"/></button>
             </li>
         </ul>
 
         <ul class="job-list">
-            <h3><font-awesome-icon icon="fa-solid fa-clock-rotate-left"/> Pending Jobs</h3>
-            <li>
-                <div class=""><p class="plate-number">41 H 3242</p><p>Heinssen Björksen Stütgarden</p></div>
-                <div><p>Type: SUV</p><p>Services: Car Wash</p></div>
-                <h3>Price: $23</h3>
-                <button  class="btn btn-start">Start <font-awesome-icon icon="fa-solid fa-play"/></button>
-            </li>
-            <li>
-                <div class=""><p class="plate-number">34 BP 9741</p><p>Heinssen Björksen Stütgarden</p></div>
-                <div><p>Type: SUV</p><p>Services: Detailing, Engine Cleaning</p></div>
-                <h3>Price: $37</h3>
-                <button href="#" class="btn btn-start">Start <font-awesome-icon icon="fa-solid fa-play"/></button>
+            <h3><font-awesome-icon icon="fa-solid fa-clock-rotate-left"/> Vehicles waiting in line</h3>
+            <li class="" v-for="job in filterPending" :key="job.job_id">
+                <div class=""><p class="plate-number">{{job.plate_number}}</p><p>{{job.customer.name}} {{job.customer.surname}}</p></div>
+                <div><p>Type: {{job.vehicle_type.name}}</p><p>{{job.service.name}}</p></div>
+                <h3>Price: ${{job.service.price}}</h3>
+                <button class="btn btn-start">Start <font-awesome-icon icon="fa-solid fa-circle-check"/></button>
             </li>
         </ul>
-
+        
         <ul class="job-list">
-            <h3>Complated Jobs</h3>
-            <li>
-                <div class=""><p class="plate-number">41 H 3242</p><p>Heinssen Björksen Stütgarden</p></div>
-                <div><p>Type: SUV</p><p>Services: Car Wash</p></div>
-                <h3>Price: $23</h3>
-                <button href="#" class="btn btn-archive">Archive</button>
+            <h3>Vehicles washed today</h3>
+            <li class="" v-for="job in filterPassive" :key="job.job_id">
+                <div class=""><p class="plate-number">{{job.plate_number}}</p><p>{{job.customer.name}} {{job.customer.surname}}</p></div>
+                <div><p>Type: {{job.vehicle_type.name}}</p><p>{{job.service.name}}</p></div>
+                <h3>Price: ${{job.service.price}}</h3>
+                <button class="btn btn-archive">Archive <font-awesome-icon icon="fa-solid fa-circle-check"/></button>
             </li>
         </ul>
-
-
     </div>
 </template>
+<script>
+export default {
+    data() {
+        return{
+        }
+    },
+    methods: {
+    },
+    computed:{ // Filter jobs by status
+        filterActive(){
+            return this.$store.state.jobData.data.filter(item =>{
+                return item.status === 2 // 
+            })
+        },
+        filterPending(){
+            return this.$store.state.jobData.data.filter(item =>{
+                return item.status === 1
+            })
+        },
+        filterPassive(){
+            return this.$store.state.jobData.data.filter(item =>{
+                return item.status === 3
+            })
+        }
+
+    },
+    mounted() {
+        return this.$store.dispatch("getJobList")
+    }
+}
+</script>
