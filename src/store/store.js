@@ -23,10 +23,14 @@ export const store = new Vuex.Store({
         jobData: {
             data: []
         },
+        vehicleTypes: {
+            data: []
+        },
         // UX Feedbacks
         logoutConfirm: "",
         loginConfirm: "",
         errorResponse: { message: "" },
+        feedbackMessage: false,
         // UI Elements
 
         // APIurls:
@@ -45,7 +49,11 @@ export const store = new Vuex.Store({
             GETcustomers:"customers",
             POSTcustomerAdd:"customers/add",
         // Jobs
-            GETjobs:"jobs/"
+            GETjobs:"jobs/",
+            POSTnewjob:"jobs/add/",
+            DELETEjob: "jobs/delete/",
+        // Vehicle Types
+            GETvehicle:"vehicle_types/"
 
     },
     getters : {
@@ -64,7 +72,8 @@ export const store = new Vuex.Store({
                 let payload = JSON.parse(userData)
                 state.userAuth.access_token = localStorage.getItem("token")
                 state.userData = payload
-                router.push("/dashboard")
+                let remindRoute = localStorage.getItem("route")
+                router.push(remindRoute)
             }
         },
         getProfile(state, data) {
@@ -82,11 +91,24 @@ export const store = new Vuex.Store({
         setCustomers(state,data){
             state.customerData = data
         },
+
+        // FEEDBACK MUTATIONS 
         pushError(state,data) {
             state.errorResponse.message = data.message
+            setTimeout(() => {
+                state.errorResponse.message = ""
+            }, 3000);
         },
+        pushMessage(state,data) {
+            state.feedbackMessage = data
+        },
+
+
         getJobs(state, data) {
             state.jobData = data
+        },
+        setVehicles(state, data) {
+            state.vehicleTypes = data
         }
     },
     actions : {
@@ -127,7 +149,7 @@ export const store = new Vuex.Store({
                 commit("setAuth", response.data.access_token)
                 localStorage.removeItem("token")
                 localStorage.setItem("token",response.data.access_token)
-                console.log("token refresh...")
+                console.log("token refresh")
             }).catch(error => {
                 this.dispatch("logout")
                 router.push("/login")
@@ -198,6 +220,45 @@ export const store = new Vuex.Store({
                 {"headers": {"Authorization": "Bearer " + localStorage.getItem("token")}}
             ).then(response => {
                 this.commit("getJobs", response.data)
+                //localStorage.setItem("Jobs",JSON.stringify(response.data.data))
+            })
+        },
+        addNewJob({state}, payload) {
+            axios.post(
+                state.BaseURL + state.POSTnewjob,
+                {   customer_id: payload.customerID, 
+                    service_id: payload.serviceID, 
+                    vehicle_type_id: payload.vehicleTypeID,
+                    plate_number: payload.plateNumber
+                },
+                {"headers": {"Authorization": "Bearer " + localStorage.getItem("token")}}
+            ).then(response => {
+                console.log(response.data)
+                this.dispatch("getJobList")
+                this.commit("pushMessage", response.data.success)
+            }).catch(error =>
+                {
+                    this.commit("pushError", JSON.parse(error.request.response))
+                    return error
+                })
+        },
+        deleteJob({state},id) {
+            axios.delete(
+                state.BaseURL + state.DELETEjob + id,
+                {"headers": {"Authorization": "Bearer " + state.userAuth.access_token}}
+            ).then(response => {
+                this.dispatch("getJobList")
+                return response
+            })
+        },
+        // VEHICLE TYPES
+        getVehicles({state}) {
+            axios.get(
+                state.BaseURL + state.GETvehicle,
+                {"headers": {"Authorization": "Bearer " + localStorage.getItem("token")}}
+            ).then(response => {
+                this.commit("setVehicles", response.data)
+                console.log(response.data)
             })
         }
     }

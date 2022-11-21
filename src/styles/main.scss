@@ -85,6 +85,13 @@ main {
         border-radius: $main-radius;
         background-color: #eee;
     }
+    select {
+        width: 10rem;
+        margin: 0 1rem 0 0.5rem;
+        padding:.5rem;
+        border-radius: $main-radius;
+        background-color: #eee;
+    }
     ul {
         padding-bottom: 2rem;
     }
@@ -143,8 +150,20 @@ nav {
     }
     .logo {
         margin-left: 1rem;
+        margin-top: .4rem;
         font-size: 1.5rem;
         color: rgb(219, 219, 219);
+    }
+    small {
+        font-size: .75rem;
+        font-weight: 500;
+        color: $gray;
+        line-height: .7rem;
+        width: auto;
+        height: auto;
+        margin: -.2rem 0 0 2rem;
+        display: inline-block;
+        position: absolute;
     }
 }
 
@@ -212,6 +231,14 @@ nav {
         h1 {
             font: typo.$font-h1
         }
+        .logo {
+            font: typo.$font-h2;
+            font-weight: 500;
+            color: $black;
+            svg {
+                color: $color-primary;
+            }
+        }
     }
 }
 @keyframes login-showup {
@@ -245,6 +272,9 @@ nav {
         opacity: 0.7;
     }
 }
+strong {
+    font-weight: 700;
+}
 button {
     cursor: pointer;
     border-radius: 3rem;
@@ -257,6 +287,18 @@ button {
     &:hover {
         box-shadow: inset 0rem 0.6rem 1rem hsla(51, 100%, 96%, 0.3);
     }
+}
+.btn-md {
+    padding: 0.6rem .7rem 0.6rem .7rem;
+    min-width: 5rem;
+    font-size: .8rem;
+    border-radius: $main-radius;
+}
+.btn-save {
+    background-color: #42a916;
+}
+.btn-cancel {
+    background-color: $gray;
 }
 .btn-sm {
     cursor:pointer;
@@ -296,13 +338,13 @@ button {
 // Component JobList.vue
 .job-list {
     li {
-        border: 1px solid rgb(229, 229, 229);
-        padding: 1rem;
+        border: .1rem solid rgb(229, 229, 229);
+        padding: 0.2rem 1rem;
         border-radius: $main-radius;
         margin-bottom: .2rem;
         background-color: rgb(245, 245, 245);
         display:grid;
-        grid-template-columns:2fr 4fr 1fr 1fr;
+        grid-template-columns:1fr 2fr 2fr 1fr 1fr 1fr 1fr;
         grid-gap:0rem;
     }
     h3 {
@@ -363,6 +405,21 @@ button {
         100% {opacity: 0;}
     }
 }
+.successMessage {
+    width: 100%;
+    border-radius: $main-radius;
+    cursor: pointer;
+    border:.1rem solid #eaeaea;
+    padding: .5rem;
+    text-align: center;
+    color: #42a916;
+    background-color: #f9ffe6;
+    animation: success .5s ease 1;
+    @keyframes success {
+        0% {opacity: 0;}
+        100% {opacity: 1;}
+    }
+}
 .add-data-card {
     border:1px solid #eee;
     padding: .2rem 1rem;
@@ -373,5 +430,51 @@ button {
     align-items: center;
     p {
         color: $color-primary;
+    }
+    animation: fade-up 0.5s forwards;
+}
+.add-job-card {
+    border:1px solid $gray;
+    padding: .2rem 1rem;
+    border-radius: $main-radius;
+    margin: .5rem 0rem;
+    p {
+        color: $color-primary;
+    }
+    animation: fade-up 0.5s forwards;
+    div {
+        display: inline-block;
+        margin: 1rem;
+    }
+}
+.toaster {
+    position: fixed;
+    width: 20rem;
+    height: max-content;
+    top:2rem;
+    left: calc((100vw - 20rem)/2);
+    margin:auto;
+    border:.1rem solid $color-primary;
+    padding: $main-padding;
+    border-radius: $main-radius;
+    box-shadow: $shadow-lg;
+    background-color: rgba(255, 255, 255, 1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .loadbar {
+        margin: .5rem;
+        position: absolute;
+        bottom:0;
+        left:0;
+        width: 19rem;
+        border-radius: .25rem;
+        height: .5rem;
+        background-color: $color-primary;
+        animation: loadingbar 3s linear forwards;
+        @keyframes loadingbar {
+            from {width: 19rem;}
+            to {width: 0rem;}
+        }
     }
 }

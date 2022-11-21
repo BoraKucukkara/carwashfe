@@ -1,6 +1,6 @@
 <template>
     <div class="top-bar">
-        <p class="logo"><font-awesome-icon icon="fa-solid fa-car"/> Car Wash CRM</p>
+        <p class="logo"><small>Car Wash CRM</small> <font-awesome-icon icon="fa-solid fa-car"/> {{this.$store.state.userData.company}} </p>
         <ul>
             <li v-if="this.$store.getters.isAuth !== ''">
                 Welcome, {{this.$store.state.userData.name}}

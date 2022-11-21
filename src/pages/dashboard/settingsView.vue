@@ -2,6 +2,8 @@
     <main class="page-fade-up">
         <h1>Account Settings</h1>
         <section>
+            <span>Compnay Name</span>
+            <p>{{this.$store.state.userData.company}} <a class="btn-sm">edit</a></p>
             <span>Name / Surname</span>
             <p>{{this.$store.state.userData.name}} {{this.$store.state.userData.surname}} <a class="btn-sm">edit</a></p>
             <span>E-mail</span>

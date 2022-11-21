@@ -164,6 +164,13 @@ main input[type=text] {
   border-radius: 0.5rem;
   background-color: #eee;
 }
+main select {
+  width: 10rem;
+  margin: 0 1rem 0 0.5rem;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  background-color: #eee;
+}
 main ul {
   padding-bottom: 2rem;
 }
@@ -221,8 +228,20 @@ nav ul li a {
 }
 .top-bar .logo {
   margin-left: 1rem;
+  margin-top: 0.4rem;
   font-size: 1.5rem;
   color: rgb(219, 219, 219);
+}
+.top-bar small {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: hsl(280deg, 2%, 66%);
+  line-height: 0.7rem;
+  width: auto;
+  height: auto;
+  margin: -0.2rem 0 0 2rem;
+  display: inline-block;
+  position: absolute;
 }
 
 .login-control {
@@ -296,6 +315,14 @@ nav ul li a {
 .login-control form h1 {
   font: 200 2.4rem "Poppins", sans-serif;
 }
+.login-control form .logo {
+  font: 200 1.8rem "Poppins", sans-serif;
+  font-weight: 500;
+  color: hsl(0deg, 0%, 30%);
+}
+.login-control form .logo svg {
+  color: rgb(218, 34, 14);
+}
 
 @-webkit-keyframes login-showup {
   0% {
@@ -360,6 +387,10 @@ nav ul li a {
     opacity: 0.7;
   }
 }
+strong {
+  font-weight: 700;
+}
+
 button {
   cursor: pointer;
   border-radius: 3rem;
@@ -374,6 +405,21 @@ button {
 }
 button:hover {
   box-shadow: inset 0rem 0.6rem 1rem hsla(51deg, 100%, 96%, 0.3);
+}
+
+.btn-md {
+  padding: 0.6rem 0.7rem 0.6rem 0.7rem;
+  min-width: 5rem;
+  font-size: 0.8rem;
+  border-radius: 0.5rem;
+}
+
+.btn-save {
+  background-color: #42a916;
+}
+
+.btn-cancel {
+  background-color: hsl(280deg, 2%, 66%);
 }
 
 .btn-sm {
@@ -437,13 +483,13 @@ button:hover {
   }
 }
 .job-list li {
-  border: 1px solid rgb(229, 229, 229);
-  padding: 1rem;
+  border: 0.1rem solid rgb(229, 229, 229);
+  padding: 0.2rem 1rem;
   border-radius: 0.5rem;
   margin-bottom: 0.2rem;
   background-color: rgb(245, 245, 245);
   display: grid;
-  grid-template-columns: 2fr 4fr 1fr 1fr;
+  grid-template-columns: 1fr 2fr 2fr 1fr 1fr 1fr 1fr;
   grid-gap: 0rem;
 }
 .job-list h3 {
@@ -552,6 +598,35 @@ button:hover {
   }
 }
 
+.successMessage {
+  width: 100%;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  border: 0.1rem solid #eaeaea;
+  padding: 0.5rem;
+  text-align: center;
+  color: #42a916;
+  background-color: #f9ffe6;
+  -webkit-animation: success 0.5s ease 1;
+          animation: success 0.5s ease 1;
+}
+@-webkit-keyframes success {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes success {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
 .add-data-card {
   border: 1px solid #eee;
   padding: 0.2rem 1rem;
@@ -560,7 +635,72 @@ button:hover {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  -webkit-animation: fade-up 0.5s forwards;
+          animation: fade-up 0.5s forwards;
 }
 .add-data-card p {
   color: rgb(218, 34, 14);
+}
+
+.add-job-card {
+  border: 1px solid hsl(280deg, 2%, 66%);
+  padding: 0.2rem 1rem;
+  border-radius: 0.5rem;
+  margin: 0.5rem 0rem;
+  -webkit-animation: fade-up 0.5s forwards;
+          animation: fade-up 0.5s forwards;
+}
+.add-job-card p {
+  color: rgb(218, 34, 14);
+}
+.add-job-card div {
+  display: inline-block;
+  margin: 1rem;
+}
+
+.toaster {
+  position: fixed;
+  width: 20rem;
+  height: -webkit-max-content;
+  height: -moz-max-content;
+  height: max-content;
+  top: 2rem;
+  left: calc((100vw - 20rem) / 2);
+  margin: auto;
+  border: 0.1rem solid rgb(218, 34, 14);
+  padding: 1.4rem;
+  border-radius: 0.5rem;
+  box-shadow: 0rem 0rem 1rem hsla(0deg, 0%, 0%, 0.2);
+  background-color: rgb(255, 255, 255);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.toaster .loadbar {
+  margin: 0.5rem;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 19rem;
+  border-radius: 0.25rem;
+  height: 0.5rem;
+  background-color: rgb(218, 34, 14);
+  -webkit-animation: loadingbar 3s linear forwards;
+          animation: loadingbar 3s linear forwards;
+}
+@-webkit-keyframes loadingbar {
+  from {
+    width: 19rem;
+  }
+  to {
+    width: 0rem;
+  }
+}
+@keyframes loadingbar {
+  from {
+    width: 19rem;
+  }
+  to {
+    width: 0rem;
+  }
 }/*# sourceMappingURL=main.css.map */

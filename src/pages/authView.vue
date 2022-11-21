@@ -4,6 +4,7 @@
         <div class="login-container">
             <picture><img src="../assets/carwashcrm.jpg" /><div class="glass"></div></picture>
             <form @submit.prevent="submit">
+                <p class="logo"><font-awesome-icon icon="fa-solid fa-car"/> Car Wash CRM</p>
                 <p v-if="this.$store.state.logoutConfirm">{{this.$store.state.logoutConfirm}}</p>
                 <p v-if="this.userName !== ''">Welcome back, {{this.userName}}</p>
                 <h1>Login</h1>
@@ -20,7 +21,7 @@
 export default {
     data() {
         return {
-                email: "erich98@example.org",
+                email: "tito37@example.org",
                 password: "123456789",
                 load: false,
                 userName: ""

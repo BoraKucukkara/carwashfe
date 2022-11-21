@@ -19,8 +19,5 @@ export default {
     },
     methods: {
     },
-    created() {
-        return this.$store.dispatch("getJobList")
-    }
 }
 </script>

@@ -33,7 +33,7 @@ export const router = new VueRouter({
                 if(store.getters.isAuth){
                     next()
                 } else {
-                    next("/login")
+                    next("/")
                 }
             }
         },
@@ -44,7 +44,7 @@ export const router = new VueRouter({
                 if(store.getters.isAuth){
                     next()
                 } else {
-                    next("/login")
+                    next("/")
                 }
             }
         },
@@ -55,7 +55,7 @@ export const router = new VueRouter({
                 if(store.getters.isAuth){
                     next()
                 } else {
-                    next("/login")
+                    next("/")
                 }
             }
         },

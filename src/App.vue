@@ -26,18 +26,15 @@ export default {
         } else {
           this.screenSelector = "dashboard"
         }
-      },
-      checkSession() {
-        this.$store.dispatch("refreshToken")
       }
     },
     created() {
       this.classSelector()
     },
-    beforeMount() {
-      this.checkSession() 
+    beforeCreate() {
+     // return this.$store.dispatch("refreshToken") // burada sıkıntı var 
     },
-    watch: { // dedects route and changes layout class in DOM
+    watch: { // watches route and changes layout class in DOM
       '$route' (){
         this.routePath = this.$route.path
         if(this.routePath == "/login" ) {
@@ -45,6 +42,7 @@ export default {
         } else {
           this.screenSelector = "dashboard"
           this.$store.commit("pushError", "")
+          localStorage.setItem("route", this.routePath)
         }
       }
     }

@@ -3,7 +3,7 @@
             <h1>Customers</h1>
 
             <div>
-        <ul class="job-list">
+        <ul class="">
             <div class="add-data-card">
                 <p><font-awesome-icon icon="fa-solid fa-user-plus" /> Add new customer</p>
                 <div>
