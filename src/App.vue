@@ -41,6 +41,7 @@ export default {
           this.screenSelector = "login-control"
         } else {
           this.screenSelector = "dashboard"
+          this.$store.commit("pushMessage", "")
           this.$store.commit("pushError", "")
           localStorage.setItem("route", this.routePath)
         }

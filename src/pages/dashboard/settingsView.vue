@@ -28,6 +28,7 @@
                 </div>
 
             </div>
+            <!-- update services response -->
             <p v-if="isSuccess" class="successMessage" @click="closeFeedback()">
                     <font-awesome-icon icon="fa-solid fa-circle-check"/> Services Updated
             </p>
