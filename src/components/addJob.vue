@@ -13,22 +13,25 @@
             <div>
                 <p>Customer:</p>
                 <select type="text" v-model="newJobData.customerID">
+                    <option disabled value="">Select</option>
                     <option  v-for="customer in this.$store.state.customerData.data" :value="customer.customer_id" :key="customer.customer_id">{{customer.name}} {{customer.surname}}</option>
                 </select>
             </div>
             <div>
                 <p>Plate Number: </p>
-                <input type="text" v-model="newJobData.plateNumber">
+                <input placeholder="Plate Number" type="text" v-model="newJobData.plateNumber">
             </div>
             <div>
                 <p>Vehicle Type:</p>
                 <select type="text" v-model="newJobData.vehicleTypeID">
+                    <option disabled value="">Select</option>
                     <option v-for="type in this.$store.state.vehicleTypes.data" :value="type.vehicle_type_id" :key="type.vehicle_type_id">{{type.name}}</option>
                 </select>
             </div>
             <div>
                 <p>Service:</p>
                 <select type="text" v-model="newJobData.serviceID">
+                    <option disabled value="">Select</option>
                     <option v-for="service in this.$store.state.serviceData.data" :value="service.service_id" :key="service.service_id">{{service.name}}</option>
                 </select>
             </div>

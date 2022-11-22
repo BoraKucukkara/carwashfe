@@ -102,6 +102,14 @@ meter {
   color: hsl(0deg, 0%, 56%);
 }
 
+.color-success {
+  color: #42a916;
+}
+
+.color-info {
+  color: goldenrod;
+}
+
 body {
   font-family: "Poppins", sans-serif;
   color: hsl(0deg, 0%, 30%);
@@ -482,6 +490,12 @@ button:hover {
     opacity: 1;
   }
 }
+.job-list {
+  border: 0.2rem solid #eaeaea;
+  padding: 1rem;
+  margin: 0.5rem 0 0.5rem 0;
+  border-radius: 0.5rem;
+}
 .job-list li {
   border: 0.1rem solid rgb(229, 229, 229);
   padding: 0.2rem 1rem;
@@ -489,7 +503,7 @@ button:hover {
   margin-bottom: 0.2rem;
   background-color: rgb(245, 245, 245);
   display: grid;
-  grid-template-columns: 1fr 2fr 2fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: 2fr 2fr 2fr 2fr 2fr 2fr 2fr;
   grid-gap: 0rem;
 }
 .job-list h3 {
@@ -507,7 +521,12 @@ button:hover {
   width: -moz-max-content;
   width: max-content;
   text-align: center;
-  margin-bottom: 0.2rem;
+}
+.job-list small {
+  font-size: 0.8rem;
+}
+.job-list small span {
+  display: block;
 }
 .job-list .btn-start {
   background-color: rgb(64, 153, 1);
@@ -533,6 +552,7 @@ button:hover {
   background-color: antiquewhite;
   -webkit-animation: active-job ease 0.5s infinite;
           animation: active-job ease 0.5s infinite;
+  border: 0.2rem solid rgb(255, 184, 91);
 }
 @-webkit-keyframes active-job {
   0% {
@@ -555,6 +575,20 @@ button:hover {
   100% {
     border-color: rgb(255, 184, 91);
   }
+}
+.job-list .job-done {
+  border: 0;
+  border-bottom: 0.1rem solid rgb(229, 229, 229);
+  padding: 0.2rem 1rem;
+  border-radius: 0;
+  margin: 0;
+  background-color: rgb(255, 255, 255);
+  display: grid;
+  grid-template-columns: 2fr 2fr 2fr 2fr 2fr 2fr 2fr;
+  grid-gap: 0rem;
+}
+.job-list .job-done:last-child {
+  border-bottom: none;
 }
 
 .errorMessage {
@@ -703,4 +737,39 @@ button:hover {
   to {
     width: 0rem;
   }
+}
+
+.daily-stats {
+  margin: 1rem 0;
+}
+.daily-stats ul {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 1rem;
+}
+.daily-stats li {
+  width: 100%;
+  border: 0.2rem solid #eee;
+  border-radius: 0.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.daily-stats h4 {
+  font: 400 1.2rem "Poppins", sans-serif;
+}
+.daily-stats p {
+  font: 200 2.4rem "Poppins", sans-serif;
+  font-weight: 500;
+}
+.daily-stats svg {
+  position: relative;
+  right: 0;
+  font-size: 3rem;
+  margin: 1rem;
+}
+
+.service-list {
+  display: flex;
+  flex-direction: column-reverse;
 }/*# sourceMappingURL=main.css.map */

@@ -45,13 +45,16 @@ export const store = new Vuex.Store({
             GETservices:"services",
             POSTserviceAdd:"services/add",
             DELETEserviceDelete:"services/delete/",
+            PATCHbulkData:"services/bulk_update/",
         // Costumers 
             GETcustomers:"customers",
             POSTcustomerAdd:"customers/add",
         // Jobs
             GETjobs:"jobs/",
+            GETdailyjob:"jobs/today/", // in progress
             POSTnewjob:"jobs/add/",
             DELETEjob: "jobs/delete/",
+            PATCHstatus: "jobs/update_status/",
         // Vehicle Types
             GETvehicle:"vehicle_types/"
 
@@ -190,6 +193,16 @@ export const store = new Vuex.Store({
                 return response
             })
         },
+        bulkUpdate({state},payload) {
+            axios.patch(
+                state.BaseURL + state.PATCHbulkData,
+                payload,
+                {"headers": {"Authorization": "Bearer " + state.userAuth.access_token}}
+            ).then(response=> {
+                this.commit("pushMessage", true)
+                return response
+            })
+        },
 
         // COSTUMER CONTROLS
         getCustomers({commit}) {
@@ -245,6 +258,15 @@ export const store = new Vuex.Store({
         deleteJob({state},id) {
             axios.delete(
                 state.BaseURL + state.DELETEjob + id,
+                {"headers": {"Authorization": "Bearer " + state.userAuth.access_token}}
+            ).then(response => {
+                this.dispatch("getJobList")
+                return response
+            })
+        },
+        setStatus({state},payload) {
+            axios.patch(
+                state.BaseURL + state.PATCHstatus + payload.id, {status: payload.status},
                 {"headers": {"Authorization": "Bearer " + state.userAuth.access_token}}
             ).then(response => {
                 this.dispatch("getJobList")

@@ -28,24 +28,26 @@
                 </div>
 
             </div>
-
+            <p v-if="isSuccess" class="successMessage" @click="closeFeedback()">
+                    <font-awesome-icon icon="fa-solid fa-circle-check"/> Services Updated
+            </p>
             <!-- api error response -->
             <p class="errorMessage" v-if="this.$store.state.errorResponse.message" >
                 <font-awesome-icon icon="fa-solid fa-circle-exclamation" />
                 {{this.$store.state.errorResponse.message}}
             </p>
-            <p class="loader" v-if="this.$store.state.serviceData.data.length == 0" >
+            <p class="loader" v-if="this.serviceContainer.length == 0" >
                 <font-awesome-icon icon="fa-solid fa-spinner" spin/> Loading services
             </p>
             
-            <ul>
-                <li class="page-fade-up" v-for="service in this.$store.state.serviceData.data.slice().reverse()" :key="service.service_id">
+            <ul class="service-list">
+                <li class="page-fade-up" v-for="service in this.serviceContainer" :key="service.service_id">
                     <h3>{{ service.name }}</h3>
-                    <div>Cost: $ <input type="number" :value="service.cost"> Price: $ <input type="number" :value="service.price">
+                    <div>Cost: $ <input type="number" v-model="service.cost"> Price: $ <input type="number" v-model="service.price">
                     <a class="btn-sm" @click="deleteService(service.service_id)"><font-awesome-icon icon="fa-solid fa-trash" /></a></div>
                 </li>
             </ul>
-            <button v-if="this.$store.state.serviceData.data.length !== 0">apply changes</button>
+            <button v-if="this.$store.state.serviceData.data.length !== 0" @click="postBulkData()">apply changes</button>
         </section>
     </main>
 </template>
@@ -57,7 +59,8 @@ export default {
                 name: "",
                 cost: "",
                 price: ""
-            }
+            },
+            serviceContainer : []
         }
     },
     methods:{
@@ -69,10 +72,26 @@ export default {
         },
         deleteService(id) {
             this.$store.dispatch('dellService', id)
+        },
+        postBulkData() {
+            this.$store.dispatch("bulkUpdate", this.serviceContainer)
+        }
+    },
+    computed: {
+        isLoaded() {
+            return this.$store.state.serviceData.data
+        },
+        isSuccess(){
+            return this.$store.state.feedbackMessage
+        }
+    },
+    watch: {
+        isLoaded() {
+            this.serviceContainer = this.$store.state.serviceData.data
         }
     },
     mounted(){
         this.loadServices()
-    },
+    }
 }
 </script>

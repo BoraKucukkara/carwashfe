@@ -16,7 +16,8 @@ $black:hsl(0, 0%, 30%);
 $gray: hsl(280, 2%, 66%);
 $color-primary: rgb(218, 34, 14);
 $color-secondary: hsla(254, 59%, 21%, 1);
-
+.color-success {color:#42a916}
+.color-info {color:goldenrod}
 // body constants
 body {
     font-family: typo.$font-family;
@@ -337,6 +338,10 @@ button {
 
 // Component JobList.vue
 .job-list {
+    border: .2rem solid #eaeaea;
+    padding:1rem;
+    margin: .5rem 0 .5rem 0;
+    border-radius: $main-radius;
     li {
         border: .1rem solid rgb(229, 229, 229);
         padding: 0.2rem 1rem;
@@ -344,7 +349,7 @@ button {
         margin-bottom: .2rem;
         background-color: rgb(245, 245, 245);
         display:grid;
-        grid-template-columns:1fr 2fr 2fr 1fr 1fr 1fr 1fr;
+        grid-template-columns:2fr 2fr 2fr 2fr 2fr 2fr 2fr;
         grid-gap:0rem;
     }
     h3 {
@@ -360,7 +365,13 @@ button {
         padding:0 1rem;
         width: max-content;
         text-align: center;
-        margin-bottom: .2rem;
+
+    }
+    small {
+        font-size: .8rem;
+        span {
+            display: block;
+        }
     }
     .btn-start {
         background-color: rgb(64, 153, 1);
@@ -385,11 +396,26 @@ button {
     .job-active {
         background-color: antiquewhite;
         animation: active-job ease .5s infinite;
+        border:.2rem solid rgb(255, 184, 91);
         @keyframes active-job {
             0% {border-color: rgb(255, 184, 91);}
             50% {border-color: rgb(254, 219, 173);}
             100% {border-color: rgb(255, 184, 91);}
             
+        }
+    }
+    .job-done {
+        border:0;
+        border-bottom: .1rem solid rgb(229, 229, 229);
+        padding: .2rem 1rem;
+        border-radius: 0;
+        margin:0;
+        background-color: rgb(255, 255, 255);
+        display:grid;
+        grid-template-columns:2fr 2fr 2fr 2fr 2fr 2fr 2fr;
+        grid-gap:0rem;
+        &:last-child {
+            border-bottom: none;
         }
     }
 }
@@ -477,4 +503,37 @@ button {
             to {width: 0rem;}
         }
     }
+}
+.daily-stats {
+    margin:1rem 0;
+    ul {
+        display: grid;
+        grid-template-columns:1fr 1fr 1fr 1fr;
+        gap: 1rem;
+    }
+    li {
+        width: 100%;
+        border: .2rem solid #eee;
+        border-radius: $main-radius;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    h4 {
+        font: typo.$font-h3;
+    }
+    p {
+        font: typo.$font-h1;
+        font-weight: 500;
+    }
+    svg {
+        position: relative;
+        right:0;
+        font-size: 3rem;
+        margin:1rem;
+    }
+}
+.service-list {
+    display: flex;
+    flex-direction: column-reverse;
 }
