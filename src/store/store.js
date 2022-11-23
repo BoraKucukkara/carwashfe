@@ -41,6 +41,11 @@ export const store = new Vuex.Store({
             POSTregister:"auth/register",
             POSTrefresh:"auth/refresh",
             GETprofile:"auth/user-profile",
+        // User
+            PATCHcompany: "users/update_company",
+            PATCHnamesurname: "users/update_name",
+            PATCHemail: "users/update_email",
+            PATCHpass: "users/update_password",
         // Services
             GETservices:"services",
             POSTserviceAdd:"services/add",
@@ -105,8 +110,6 @@ export const store = new Vuex.Store({
         pushMessage(state,data) {
             state.feedbackMessage = data
         },
-
-
         getJobs(state, data) {
             state.jobData = data
         },
@@ -159,7 +162,47 @@ export const store = new Vuex.Store({
                 return error
             })
         },
-
+        // USER PROFILE UPDATES
+        refreshProfile({state}) {
+            axios.get(
+                state.BaseURL + state.GETprofile,
+                {"headers": {"Authorization": "Bearer " + state.userAuth.access_token}}
+            ).then(response =>{
+                this.commit("getProfile", response.data.user)
+                localStorage.setItem("userData",JSON.stringify(response.data.user))
+                console.log("Profile refreshed")
+            })
+        },
+        updateCompany({state, dispatch}, payload) {
+            axios.patch(
+                state.BaseURL + state.PATCHcompany, {company: payload},
+                {"headers": {"Authorization": "Bearer " + localStorage.getItem("token")}}
+            ).then(response => {
+                console.log("Company updated")
+                dispatch("refreshProfile")
+                return response
+            })
+        },
+        updateName({state, dispatch}, payload) {
+            axios.patch(
+                state.BaseURL + state.PATCHnamesurname, payload,
+                {"headers": {"Authorization": "Bearer " + localStorage.getItem("token")}}
+            ).then(response => {
+                console.log("Name updated")
+                dispatch("refreshProfile")
+                return response
+            })
+        },
+        updateEmail({state, dispatch}, payload) {
+            axios.patch(
+                state.BaseURL + state.PATCHemail, {email: payload},
+                {"headers": {"Authorization": "Bearer " + localStorage.getItem("token")}}
+            ).then(response => {
+                console.log("E-mail updated")
+                dispatch("refreshProfile")
+                return response
+            })
+        },
         // SERVICE CONTROLS
         getServices({commit}) {
             axios.get(
@@ -180,8 +223,8 @@ export const store = new Vuex.Store({
                 this.commit("pushError", "")
                 return response
             }).catch(error => {
-                console.log(error)
                 this.commit("pushError", JSON.parse(error.request.response))
+                return error
             })
         },
         dellService({state},id) {
@@ -246,7 +289,6 @@ export const store = new Vuex.Store({
                 },
                 {"headers": {"Authorization": "Bearer " + localStorage.getItem("token")}}
             ).then(response => {
-                console.log(response.data)
                 this.dispatch("getJobList")
                 this.commit("pushMessage", response.data.success)
             }).catch(error =>
@@ -280,7 +322,6 @@ export const store = new Vuex.Store({
                 {"headers": {"Authorization": "Bearer " + localStorage.getItem("token")}}
             ).then(response => {
                 this.commit("setVehicles", response.data)
-                console.log(response.data)
             })
         }
     }
