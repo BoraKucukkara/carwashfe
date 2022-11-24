@@ -12,6 +12,20 @@ library.add(faSackDollar,faCoins,faCar,faUserPlus, faSpinner,faPlay,faSoap,faCir
 
 Vue.config.productionTip = false
 
+// VEE VALIDATE 
+import { ValidationObserver, ValidationProvider} from 'vee-validate'
+Vue.component('ValidationProvider', ValidationProvider)
+Vue.component('ValidationObserver', ValidationObserver)
+import { extend } from 'vee-validate';
+import { required, email } from 'vee-validate/dist/rules';
+extend('email', email);
+extend('required', {
+  ...required,
+  message: 'This field is required'
+});
+
+
+// VUE APP
 new Vue({
   store,
   router,

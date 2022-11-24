@@ -62,7 +62,6 @@ export const store = new Vuex.Store({
             PATCHstatus: "jobs/update_status/",
         // Vehicle Types
             GETvehicle:"vehicle_types/"
-
     },
     getters : {
         isAuth(state) {
@@ -199,6 +198,16 @@ export const store = new Vuex.Store({
                 {"headers": {"Authorization": "Bearer " + localStorage.getItem("token")}}
             ).then(response => {
                 console.log("E-mail updated")
+                dispatch("refreshProfile")
+                return response
+            })
+        },
+        updatePassword({state, dispatch}, payload) {
+            axios.patch(
+                state.BaseURL + state.PATCHpass, payload,
+                {"headers": {"Authorization": "Bearer " + localStorage.getItem("token")}}
+            ).then(response => {
+                console.log("Password updated")
                 dispatch("refreshProfile")
                 return response
             })

@@ -3,36 +3,40 @@
         <h1>Settings</h1>
         <section>
             <h2>Profile Settings</h2>
-
+            <!-- Company -->
             <span>Company Name</span>
             <p v-if="!editMode.company">{{this.$store.state.userData.company}} <a class="btn-sm page-fade-up" @click="editCompany(true)">edit</a></p>
             <p v-if="editMode.company">
                 <input type="text" v-model="userData.company">
                 <a class="btn-sm page-fade-up" @click="editCompany('save')">save</a> <a class="btn-sm page-fade-up" @click="editCompany(false)">cancel</a> 
             </p>
-
+            <!-- Name Surname -->
             <span>Name / Surname</span>
             <p v-if="!editMode.name">{{this.$store.state.userData.name}} {{this.$store.state.userData.surname}} <a @click="editName(true)" class="btn-sm">edit</a></p>
             <p v-if="editMode.name">
                 <input type="text" v-model="userData.name"> <input type="text" v-model="userData.surname">
                 <a class="btn-sm page-fade-up" @click="editName('save')">save</a> <a class="btn-sm page-fade-up" @click="editName(false)">cancel</a> 
             </p>
-
+            <!-- E-mail -->
             <span>E-mail</span>
             <p v-if="!editMode.email">{{this.$store.state.userData.email}} <a class="btn-sm" @click="editEmail(true)">change</a></p>
             <p v-if="editMode.email">
-                <input type="text" v-model="userData.email">
-                <a class="btn-sm page-fade-up" @click="editEmail('save')">save</a> <a class="btn-sm page-fade-up" @click="editEmail(false)">cancel</a> 
+                <ValidationObserver v-slot="{ invalid }">
+                    <ValidationProvider name="email" rules="required|email" v-slot="{ errors }">
+                        <input type="text" v-model="userData.email">
+                        <span> {{ errors[0] }} </span>
+                    </ValidationProvider>
+                    <button class="btn-sm page-fade-up" @click="editEmail('save')" :disabled="invalid">save</button> <a class="btn-sm page-fade-up" @click="editEmail(false)">cancel</a>
+                </ValidationObserver>
             </p>
-           
+            <!-- Password -->
             <span>Password</span>
-            <p v-if="!editMode.password">********* <a class="btn-sm" @click="editPassword(true)">reset</a></p>
+            <p v-if="!editMode.password">********* <a class="btn-sm" @click="editPassword(true)">change</a></p>
             <p v-if="editMode.password">
-                <input type="text" v-model="userData.password"> <input type="text" v-model="editMode.passwordConfirm">
+                <input type="text" v-model="editMode.passwordNew"> <input type="text" v-model="editMode.passwordConfirm">
                 <a class="btn-sm page-fade-up" @click="editPassword('save')">save</a> <a class="btn-sm page-fade-up" @click="editPassword(false)">cancel</a> 
             </p>
             <span v-if="!editMode.passMatch && editMode.password">Passwords do not match</span>
-
         </section>
         <section>
             <h2>Services</h2>
@@ -90,8 +94,9 @@ export default {
                 name: false,
                 email: false,
                 password: false,
+                passwordNew: "",
                 passwordConfirm: "",
-                passMatch: null
+                passMatch: true
             },
             userData: []
         }
@@ -136,8 +141,9 @@ export default {
             }
         },
         editPassword(data) {
-            if(data == 'save' && this.passMatch) {
-                this.$store.dispatch("updatePassword", this.userData.password)
+            if(data == 'save') {
+                let payload = {password: this.editMode.passwordNew, password_confirm: this.editMode.passwordConfirm}
+                this.$store.dispatch("updatePassword", payload)
                 this.editMode.password = false
             } else if(data == false) {
                 this.editMode.password = data
