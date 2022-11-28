@@ -61,7 +61,7 @@
         <!-- Complated JOBS-->
         <ul class="job-list">
             <h3><font-awesome-icon icon="fa-solid fa-circle-check" class="color-success"/> Complated Jobs ({{this.filterPassive.length}})
-            <i class="page-fade-up" v-if="startDateData && endDateData">{{startDateFormatted}} / {{endDateFormatted}} <a href="#" @click="clearFilter()" class="clear-filter"><font-awesome-icon icon="fa-solid fa-circle-xmark" /></a></i></h3>
+            <i class="page-fade-up" v-if="filter.start_date && filter.end_date">{{startDateFormatted}} / {{endDateFormatted}} <a href="#" @click="clearFilter()" class="clear-filter"><font-awesome-icon icon="fa-solid fa-circle-xmark" /></a></i></h3>
             <li class="page-fade-up job-done" v-for="job in filterPassive" :key="job.job_id">
                 <p class="plate-number">{{job.plate_number}}</p>
                 <p>{{job.customer.name}} {{job.customer.surname}}</p>
@@ -87,8 +87,11 @@ export default {
         return{
             startDate: "",
             endDate: "",
-            startDateData:"",
-            endDateData:"",
+            filter:{
+                status: 3,
+                start_date:"",
+                end_date:"",
+            },
             jobform: false,
             dailyIncome: 0,
             dailyCost: 0,
@@ -98,16 +101,15 @@ export default {
                 mode: "date",
                 data: 'DD-MM-YYY'
             },
-
         }
     },
     methods: {
         clearFilter() {
-            this.startDateData = "",
-            this.endDateData = ""
+            this.filter.start_date = "",
+            this.filter.end_date = ""
         },
         filterJobs() {
-            
+            this.$store.dispatch("getJobsByDate", this.filter)
         },
         closeFeedback() {
             this.$store.commit("pushMessage", false)
@@ -160,13 +162,8 @@ export default {
         this.$store.dispatch("getJobList")
     },
     watch: {
-        isSuccess(){
-            if(this.isSuccess) {
-                this.jobform = false
-            }
-        },
-        endDateFormatted() {this.endDateData = this.endDateFormatted},
-        startDateFormatted() {this.startDateData = this.startDateFormatted}
+        endDateFormatted() {this.filter.start_date = this.endDateFormatted},
+        startDateFormatted() {this.filter.end_date = this.startDateFormatted}
     },
     updated() {
         this.totalPrices()

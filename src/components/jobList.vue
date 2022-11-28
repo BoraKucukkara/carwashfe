@@ -40,7 +40,7 @@
                 <p v-if="isSuccess" class="successMessage" @click="closeFeedback()">
                     <font-awesome-icon icon="fa-solid fa-circle-check"/> Job added succesfully
                 </p>
-                <add-job v-if="jobform"/>
+                <add-job v-if="jobform" @isJobAdded="jobform = $event"/>
          </div>
         <!-- Active JOBS-->
         <ul class="job-list page-fade-up">

@@ -60,6 +60,8 @@ export const store = new Vuex.Store({
             POSTnewjob:"jobs/add/",
             DELETEjob: "jobs/delete/",
             PATCHstatus: "jobs/update_status/",
+            POSTfilterjobs: "jobs/filter/jobs",
+            POSTfilterstatus: "jobs/filter/jobs/status",
         // Vehicle Types
             GETvehicle:"vehicle_types/"
     },
@@ -326,13 +328,14 @@ export const store = new Vuex.Store({
         },
         getJobsByDate({state},payload) {
             axios.post(
-                state.BaseURL + state.POSTnewjob,
-                {"status":payload.status,"start_date":payload.startDate,"end_date":payload.endDate},
+                state.BaseURL + state.POSTfilterjobs, payload,
                 {"headers": {"Authorization": "Bearer " + localStorage.getItem("token")}}
             ).then(response => {
-                return response
+                this.commit("getJobs", response.data)
+                console.log(response)
             })
         },
+
         // VEHICLE TYPES
         getVehicles({state}) {
             axios.get(
