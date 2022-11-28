@@ -6,6 +6,7 @@ import { store } from '@/store/store';
 import Dashboard from "../pages/dashboard/homeView";
 import Settings from "../pages/dashboard/settingsView";
 import Customers from "../pages/dashboard/customersView";
+import Jobs from "../pages/dashboard/jobsView"
 import Auth from "../pages/authView";
 // navitagions 
 import sideBar from "../components/sideBar.vue"
@@ -51,6 +52,17 @@ export const router = new VueRouter({
         {
             path: "/customers",
             components: {default:Customers,top:topBar,side:sideBar},
+            beforeEnter(to, from, next) {
+                if(store.getters.isAuth){
+                    next()
+                } else {
+                    next("/")
+                }
+            }
+        },
+        {
+            path: "/jobs",
+            components: {default:Jobs,top:topBar,side:sideBar},
             beforeEnter(to, from, next) {
                 if(store.getters.isAuth){
                     next()

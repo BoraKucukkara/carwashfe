@@ -324,6 +324,15 @@ export const store = new Vuex.Store({
                 return response
             })
         },
+        getJobsByDate({state},payload) {
+            axios.post(
+                state.BaseURL + state.POSTnewjob,
+                {"status":payload.status,"start_date":payload.startDate,"end_date":payload.endDate},
+                {"headers": {"Authorization": "Bearer " + localStorage.getItem("token")}}
+            ).then(response => {
+                return response
+            })
+        },
         // VEHICLE TYPES
         getVehicles({state}) {
             axios.get(

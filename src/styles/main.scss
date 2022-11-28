@@ -92,7 +92,7 @@ main {
         background-color: #eee;
     }
     ul {
-        padding-bottom: 2rem;
+        padding-bottom: 0rem;
     }
     li{
         border-bottom: 1px solid #eee;
@@ -360,6 +360,21 @@ button {
     h3 {
         margin: .5rem 0;
     }
+    i{
+        font-size: 1rem;
+        background-color: #fef4d7;
+        border:.1rem solid #e9dfc5;
+        color: #666;
+        padding:.2rem .5rem;
+        border-radius: $main-radius;
+        font-weight: 500;
+        &::before {
+            content: "Filtered by Date ";
+            font-size: .8rem;
+            padding: .5rem;
+            color:#42a916;
+        }
+    } 
     .plate-number {
         border-radius: $main-radius;
         border:.2rem solid rgb(154, 154, 154);
@@ -423,6 +438,45 @@ button {
             border-bottom: none;
         }
     }
+}
+.job-filter {
+    border: .2rem solid #eaeaea;
+    background-color: #eaeaea;
+    padding: 0 .5rem;
+    border-radius: $main-radius;
+    color: $black;
+    input[type="text"] {
+        background-color: rgb(250, 250, 250);
+    }
+    span {
+        color: $black;
+        padding: 0 .5rem;
+        font-size: .9rem;
+    }
+    .calendar-icon {
+        color: $gray;
+        padding: 0 0 0 .5rem;
+    }
+    .header {
+        font-weight: 500;
+        color:$color-primary;
+    }
+    button {
+        border-radius: $main-radius;
+        min-width:min-content;
+        width: max-content;
+        margin:0;
+        height: max-content;
+        padding: 0.5rem 0.8rem;
+        text-align: center;
+        font: typo.$font-sm;
+        color: white;
+    }
+}
+.clear-filter {
+    padding: 0 0 0 .5rem;
+    font-size: .9rem;
+    color:$gray;
 }
 .errorMessage {
     color: $color-primary;
@@ -535,7 +589,7 @@ button {
         position: relative;
         right:0;
         font-size: 3rem;
-        margin:1rem;
+        margin:.2rem;
     }
 }
 .service-list {

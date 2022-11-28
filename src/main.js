@@ -6,11 +6,21 @@ import { router } from "./routes/routes"
 // fontawesome imports
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import { faSackDollar,faCoins,faCar,faUserPlus, faSpinner,faPlay,faSoap,faCircleCheck,faClockRotateLeft,faGear,faPowerOff,faTrash,faUser,faCircleExclamation } from '@fortawesome/free-solid-svg-icons'
+import { faCalendarDays, faCircleXmark,faSackDollar,faCoins,faCar,faUserPlus, faSpinner,faPlay,faSoap,faCircleCheck,faClockRotateLeft,faGear,faPowerOff,faTrash,faUser,faCircleExclamation } from '@fortawesome/free-solid-svg-icons'
 Vue.component('font-awesome-icon', FontAwesomeIcon)
-library.add(faSackDollar,faCoins,faCar,faUserPlus, faSpinner,faPlay,faSoap,faCircleCheck,faClockRotateLeft,faGear,faPowerOff,faTrash,faUser,faCircleExclamation)
+library.add(faCalendarDays, faCircleXmark,faSackDollar,faCoins,faCar,faUserPlus, faSpinner,faPlay,faSoap,faCircleCheck,faClockRotateLeft,faGear,faPowerOff,faTrash,faUser,faCircleExclamation)
 
 Vue.config.productionTip = false
+
+//V_CALENDAR
+import VCalendar from 'v-calendar';
+
+// Use v-calendar & v-date-picker components
+Vue.use(VCalendar, {
+  componentPrefix: 'vc',  // Use <vc-calendar /> instead of <v-calendar />
+});
+
+
 
 // VEE VALIDATE 
 import { ValidationObserver, ValidationProvider} from 'vee-validate'
