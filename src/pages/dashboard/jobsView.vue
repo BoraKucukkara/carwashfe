@@ -29,7 +29,7 @@
                 <li>
                     <div>
                         <h4>Complated Jobs</h4>
-                        <p>{{this.filterPassive.length}}</p>
+                        <p>{{this.jobData.data.length}}</p>
                     </div>
                     <font-awesome-icon icon="fa-solid fa-car" class="color-success" />
                     
@@ -60,9 +60,9 @@
         
         <!-- Complated JOBS-->
         <ul class="job-list">
-            <h3><font-awesome-icon icon="fa-solid fa-circle-check" class="color-success"/> Complated Jobs ({{this.filterPassive.length}})
+            <h3><font-awesome-icon icon="fa-solid fa-circle-check" class="color-success"/> Complated Jobs ({{this.jobData.data.length}})
             <i class="page-fade-up" v-if="filter.start_date && filter.end_date">{{startDateFormatted}} / {{endDateFormatted}} <a href="#" @click="clearFilter()" class="clear-filter"><font-awesome-icon icon="fa-solid fa-circle-xmark" /></a></i></h3>
-            <li class="page-fade-up job-done" v-for="job in filterPassive" :key="job.job_id">
+            <li class="page-fade-up job-done" v-for="job in this.jobData.data" :key="job.job_id">
                 <p class="plate-number">{{job.plate_number}}</p>
                 <p>{{job.customer.name}} {{job.customer.surname}}</p>
                 <strong>{{job.vehicle_type.name}}</strong>
@@ -85,6 +85,9 @@ export default {
     },
     data() {
         return{
+            jobData: {
+                data: []
+            },
             startDate: "",
             endDate: "",
             filter:{
@@ -110,26 +113,28 @@ export default {
         },
         filterJobs() {
             this.$store.dispatch("getJobsByDate", this.filter)
+            this.refreshJobs();
         },
         closeFeedback() {
             this.$store.commit("pushMessage", false)
         },
-        deleteJob(id) {
-            this.$store.dispatch('deleteJob', id)
-        },
-        changeStatus(id,status) {
-            this.$store.dispatch('setStatus', {"id": id,"status": status })
-        },
         totalPrices() {
             let income = 0
-            for(let i = 0; i < this.filterPassive.length; i++) {
-                income += this.filterPassive[i].service.price
+            for(let i = 0; i < this.jobData.data.length; i++) {
+                income += this.jobData.data[i].service.price
             } this.dailyIncome = income
             let cost = 0
-            for(let i = 0; i < this.filterPassive.length; i++) {
-                cost += this.filterPassive[i].service.cost
+            for(let i = 0; i < this.jobData.data.length; i++) {
+                cost += this.jobData.data[i].service.cost
             } this.dailyCost = cost
             this.dailyEarning = this.dailyIncome - this.dailyCost
+        },
+        refreshJobs(){
+            setTimeout(() => {
+                this.jobData.data = this.$store.state.jobData.data
+                            
+            console.log(this.jobData)
+            }, 1000);
         }
     },
     computed:{ // Filter jobs by status
@@ -149,13 +154,11 @@ export default {
             let newDate = day + '-' + month + '-' + year
             return newDate.split(' ')[0]
         },
-        filterPassive(){
-            return this.$store.state.jobData.data.filter(item =>{
-                return item.status === 3
-            })
-        },
         isSuccess(){
             return this.$store.state.feedbackMessage
+        },
+        isUpdated() {
+            return this.$store.state.jobData.data
         }
     },
     created() {
@@ -163,10 +166,12 @@ export default {
     },
     watch: {
         endDateFormatted() {this.filter.start_date = this.endDateFormatted},
-        startDateFormatted() {this.filter.end_date = this.startDateFormatted}
+        startDateFormatted() {this.filter.end_date = this.startDateFormatted},
+        isUpdated() {this.refreshJobs()}
     },
     updated() {
         this.totalPrices()
+        this.refreshJobs()
     }
 }
 </script>

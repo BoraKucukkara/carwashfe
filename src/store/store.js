@@ -137,13 +137,13 @@ export const store = new Vuex.Store({
                 state.BaseURL + state.POSTlogout, "",
                 {"headers": {"Authorization": "Bearer " + state.userAuth.access_token}}
             ).then(response => {
-                commit("clearAuth", response.data),
+                commit("clearAuth", response.data)
                 localStorage.clear()
                 router.push("/login")
                 console.log(response.data)
                 return response
             }).catch(error => {
-                commit("clearAuth", error.data),
+                commit("clearAuth", error.data)
                 localStorage.clear()
                 router.push("/login")
             })
@@ -258,7 +258,7 @@ export const store = new Vuex.Store({
             })
         },
 
-        // COSTUMER CONTROLS
+        // CUSTOMER CONTROLS
         getCustomers({commit}) {
             axios.get(
                 this.state.BaseURL + this.state.GETcustomers,
@@ -332,7 +332,8 @@ export const store = new Vuex.Store({
                 {"headers": {"Authorization": "Bearer " + localStorage.getItem("token")}}
             ).then(response => {
                 this.commit("getJobs", response.data)
-                console.log(response)
+            }).catch(error=> {
+                console.log(error)
             })
         },
 
