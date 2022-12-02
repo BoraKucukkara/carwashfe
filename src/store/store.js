@@ -332,6 +332,18 @@ export const store = new Vuex.Store({
                 {"headers": {"Authorization": "Bearer " + localStorage.getItem("token")}}
             ).then(response => {
                 this.commit("getJobs", response.data)
+                console.log(response)
+            }).catch(error=> {
+                console.log(error)
+            })
+        },
+        getComplatedJobs({state}) {
+            axios.post(
+                state.BaseURL + state.POSTfilterstatus, {"status":"3"},
+                {"headers": {"Authorization": "Bearer " + localStorage.getItem("token")}}
+            ).then(response => {
+                this.commit("getJobs", response.data)
+                console.log(response)
             }).catch(error=> {
                 console.log(error)
             })

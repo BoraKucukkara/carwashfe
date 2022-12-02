@@ -91,7 +91,7 @@ export default {
             startDate: "",
             endDate: "",
             filter:{
-                status: 3,
+                status: "3",
                 start_date:"",
                 end_date:"",
             },
@@ -162,11 +162,11 @@ export default {
         }
     },
     created() {
-        this.$store.dispatch("getJobList")
+        this.$store.dispatch("getComplatedJobs")
     },
     watch: {
-        endDateFormatted() {this.filter.start_date = this.endDateFormatted},
-        startDateFormatted() {this.filter.end_date = this.startDateFormatted},
+        endDateFormatted() {this.filter.end_date = this.endDateFormatted},
+        startDateFormatted() {this.filter.start_date = this.startDateFormatted},
         isUpdated() {this.refreshJobs()}
     },
     updated() {
